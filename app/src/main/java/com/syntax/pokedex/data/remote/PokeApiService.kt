@@ -3,6 +3,7 @@ package com.syntax.pokedex.data.remote
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.syntax.pokedex.data.model.DataSource
+import com.syntax.pokedex.data.model.pokemon.Pokemon
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -23,6 +24,9 @@ interface PokeApiService {
 
     @GET("pokemon?limit=100000&offset=0")
     suspend fun getPokemonList():DataSource
+
+    @GET("pokemon/{name}")
+    suspend fun getPokemon(name: String): Pokemon
 }
 
 object RetroApi {

@@ -29,6 +29,6 @@ interface PokeApiService {
     suspend fun getPokemon(name: String): Pokemon
 }
 
-object RetroApi {
+object PokeApi {
     val retrofitservice: PokeApiService by lazy { retrofit.create(PokeApiService::class.java) }
 }

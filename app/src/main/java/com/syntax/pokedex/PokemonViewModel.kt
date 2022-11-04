@@ -23,6 +23,16 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         get() = _loading
 
 
+    fun loadPokeArtwork(name: String){
+        viewModelScope.launch {
+            try {
+                repository.loadPokemonArtwork(name)
+            }catch (e: Exception){
+                Log.e(TAG, "Error loading data from API: $e")
+            }
+        }
+    }
+
     fun loadPokeList() {
         viewModelScope.launch {
             try {

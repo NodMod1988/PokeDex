@@ -3,6 +3,7 @@ package com.syntax.pokedex.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.syntax.pokedex.data.model.pokemon.Artwork
 import com.syntax.pokedex.data.model.pokemon.Other
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.model.pokemon.PokemonList
@@ -14,6 +15,10 @@ class Repository(private val api: PokeApi) {
     val pokemons: LiveData<List<PokemonList>>
         get() = _pokemons
 
+    private val _artWork = MutableLiveData<Artwork>()
+    val artWork: LiveData<Artwork>
+        get() = _artWork
+
     suspend fun loadPokemons() {
         try {
 
@@ -23,6 +28,15 @@ class Repository(private val api: PokeApi) {
         }catch (e:Exception){
             Log.e("Repository", e.message.toString())
         }
+    }
 
+    suspend fun loadPokemonArtwork(name: String){
+        try {
+            val response = api.retrofitservice.getPokemon(name)
+            _artWork.value = response.sprites.other.officialArtwork
+
+        }catch (e: Exception){
+            Log.e("Repository", e.message.toString())
+        }
     }
 }

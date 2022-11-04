@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.syntax.pokedex.R
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.model.pokemon.PokemonList
+import com.syntax.pokedex.ui.HomeFragmentDirections
 
 class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
@@ -45,7 +47,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
         holder.image.load(imgURI)
 
         holder.layout.setOnClickListener{
-
+            holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.name))
         }
 
     }

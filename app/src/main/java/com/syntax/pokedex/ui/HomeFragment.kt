@@ -23,11 +23,7 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel.loadPokeList()
-
-
         binding = FragmentHomeBinding.inflate(inflater)
-
-
 
         return binding.root
     }

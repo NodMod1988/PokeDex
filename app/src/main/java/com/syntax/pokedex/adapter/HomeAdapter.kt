@@ -40,8 +40,8 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
         holder.title.text = item.name
 
+        //Setzt die image Url auf die jeweilige Position und lädt das bild
         var imgURI: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${position+1}.png"
-
         holder.image.load(imgURI)
 
         holder.layout.setOnClickListener{

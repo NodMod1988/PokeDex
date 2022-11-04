@@ -3,9 +3,11 @@ package com.syntax.pokedex.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.syntax.pokedex.R
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.model.pokemon.PokemonList
@@ -16,6 +18,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val title: TextView = view.findViewById(R.id.txt_pokename)
+        val image: ImageView = view.findViewById(R.id.img_pokemon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -35,6 +38,9 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
         holder.title.text = item.name
 
+        var imgURI: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${position+1}.png"
+
+        holder.image.load(imgURI)
 
     }
 

@@ -14,15 +14,11 @@ class Repository(private val api: PokeApi) {
     val pokemons: LiveData<List<PokemonList>>
         get() = _pokemons
 
-    private val _pokemonPicture = MutableLiveData<Other>()
-    val pokemonPicture: LiveData<Other>
-        get() = _pokemonPicture
-
     suspend fun loadPokemons() {
         try {
 
-            val response = PokeApi.retrofitservice.getPokemonList()
-            _pokemons.value = response.result
+            val response = api.retrofitservice.getPokemonList()
+            _pokemons.value = response.results
 
         }catch (e:Exception){
             Log.e("Repository", e.message.toString())

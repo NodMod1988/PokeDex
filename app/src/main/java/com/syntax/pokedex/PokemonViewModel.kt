@@ -22,9 +22,8 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val loading: LiveData<ApiStatus>
         get() = _loading
 
-    val details = repository.pokemons
 
-    fun load() {
+    fun loadPokeList() {
         viewModelScope.launch {
             try {
                 _loading.value = ApiStatus.LOADING

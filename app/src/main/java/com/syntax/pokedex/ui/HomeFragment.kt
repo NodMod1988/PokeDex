@@ -11,9 +11,6 @@ import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.adapter.HomeAdapter
 import com.syntax.pokedex.databinding.FragmentHomeBinding
 
-const val TAG = "PokemonViewModel"
-
-enum class ApiStatus { LOADING, DONE, ERROR }
 
 class HomeFragment: Fragment() {
 
@@ -25,7 +22,12 @@ class HomeFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.loadPokeList()
+
+
         binding = FragmentHomeBinding.inflate(inflater)
+
+
 
         return binding.root
     }
@@ -39,7 +41,6 @@ class HomeFragment: Fragment() {
         binding.pokeRecycler.adapter = homeAdapter
 
 
-        viewModel.load()
         viewModel.pokeList.observe(
             viewLifecycleOwner,
             Observer {

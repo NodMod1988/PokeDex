@@ -52,6 +52,11 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     }
 
+    fun filterList(filterList: List<PokemonList>){
+        dataset = filterList
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return dataset.size
     }

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.adapter.HomeAdapter
 import com.syntax.pokedex.databinding.FragmentHomeBinding
+import java.util.*
 
 
 class HomeFragment: Fragment() {
@@ -43,5 +45,7 @@ class HomeFragment: Fragment() {
                 homeAdapter.submitList(it)
             }
         )
+
+
     }
 }

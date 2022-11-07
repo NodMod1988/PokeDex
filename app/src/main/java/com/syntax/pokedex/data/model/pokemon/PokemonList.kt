@@ -1,8 +1,16 @@
 package com.syntax.pokedex.data.model.pokemon
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class PokemonList (
-   val name: String,
-   val url: String
-        )
+
+    @PrimaryKey
+    val name: String,
+
+    val url: String
+
+    )
 
 

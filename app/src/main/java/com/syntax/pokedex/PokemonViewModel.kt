@@ -26,9 +26,11 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     fun loadPokeArtwork(name: String){
         viewModelScope.launch {
             try {
+                _loading.value = ApiStatus.LOADING
                 repository.loadPokemonArtwork(name)
+                _loading.value = ApiStatus.DONE
             }catch (e: Exception){
-                Log.e(TAG, "Error loading data from API: $e")
+                Log.e(TAG, "Error loading artwork data from API: $e")
             }
         }
     }
@@ -40,8 +42,20 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
                 repository.loadPokemons()
                 _loading.value = ApiStatus.DONE
             } catch (e: Exception) {
-                Log.e(TAG, "Error loading data from API: $e")
+                Log.e(TAG, "Error loading list data from API: $e")
                 _loading.value = ApiStatus.ERROR
+            }
+        }
+    }
+
+    fun loadPokeDetails(name: String){
+        viewModelScope.launch {
+            try {
+                _loading.value = ApiStatus.LOADING
+                repository.loadPokemonDetails(name)
+                _loading.value = ApiStatus.DONE
+            }catch (e: Exception){
+                Log.e(TAG, "Error loading detail data from API: $e")
             }
         }
     }

@@ -38,7 +38,11 @@ class DetailFragment: Fragment() {
             viewModel.pokemon.observe(
                 viewLifecycleOwner,
                 Observer {
-
+                    binding.imgPokemonPic.load(it.sprites.other.officialArtwork.front_default)
+                    binding.txtPokeId.text = it.id.toString()
+                    binding.txtPokeHeight.text = it.height.toString()
+                    binding.txtPokeWeight.text = it.weight.toString()
+                    binding.txtPokeName.text = it.name
                 }
             )
         }

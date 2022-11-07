@@ -22,6 +22,8 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val loading: LiveData<ApiStatus>
         get() = _loading
 
+    val pokemon = repository.pokemon
+
 
     fun loadPokeArtwork(name: String){
         viewModelScope.launch {
@@ -52,7 +54,7 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             try {
                 _loading.value = ApiStatus.LOADING
-                repository.loadPokemonDetails(name)
+                repository.loadPokemon(name)
                 _loading.value = ApiStatus.DONE
             }catch (e: Exception){
                 Log.e(TAG, "Error loading detail data from API: $e")

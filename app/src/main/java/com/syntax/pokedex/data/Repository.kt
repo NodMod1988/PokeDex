@@ -19,9 +19,9 @@ class Repository(private val api: PokeApi) {
     val artWork: LiveData<Artwork>
         get() = _artWork
 
-    private val _pokemonDetail = MutableLiveData<Pokemon>()
+    private val _pokemon = MutableLiveData<Pokemon>()
     val pokemon: LiveData<Pokemon>
-        get() = _pokemonDetail
+        get() = _pokemon
 
     suspend fun loadPokemons() {
         try {
@@ -44,10 +44,10 @@ class Repository(private val api: PokeApi) {
         }
     }
 
-    suspend fun loadPokemonDetails(name: String){
+    suspend fun loadPokemon(name: String){
         try {
             val response = api.retrofitservice.getPokemon(name)
-            _pokemonDetail.value = response
+            _pokemon.value = response
 
         }catch (e:Exception){
             Log.e("Repository", e.message.toString())

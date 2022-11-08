@@ -55,11 +55,4 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
             }
         }
     }
-
-    fun update(pokemonList: PokemonList){
-        viewModelScope.launch {
-            repository.update(pokemonList)
-        }
-    }
-
 }

@@ -45,11 +45,4 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         }
     }
 
-    suspend fun update(pokemonList: PokemonList) {
-        try {
-            database.pokeDatabaseDao.updateUrl(pokemonList)
-        } catch (e:Exception) {
-            Log.d("Repository", "Failed to update from Database: $e")
-        }
-    }
 }

@@ -6,16 +6,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.R
+import com.syntax.pokedex.data.Repository
+import com.syntax.pokedex.data.local.PokeDatabase
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.model.pokemon.PokemonList
+import com.syntax.pokedex.data.remote.PokeApi
 import com.syntax.pokedex.ui.HomeFragmentDirections
 
-class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     private var dataset = listOf<PokemonList>()
 
@@ -40,21 +45,17 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item: PokemonList = dataset[position]
 
+
         holder.title.text = item.name
 
         //Setzt die image Url auf die jeweilige Position und lädt das bild
-        var imgURI: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${position+1}.png"
-        holder.image.load(imgURI)
+
+        holder.image.load(item.url)
 
         holder.layout.setOnClickListener{
             holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.name))
         }
 
-    }
-
-    fun filterList(filterList: List<PokemonList>){
-        dataset = filterList
-        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

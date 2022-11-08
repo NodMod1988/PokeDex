@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.syntax.pokedex.data.Repository
 import com.syntax.pokedex.data.local.getDatabase
+import com.syntax.pokedex.data.model.pokemon.PokemonList
 import com.syntax.pokedex.data.remote.PokeApi
 import kotlinx.coroutines.launch
 
@@ -54,4 +55,11 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
             }
         }
     }
+
+    fun update(pokemonList: PokemonList){
+        viewModelScope.launch {
+            repository.update(pokemonList)
+        }
+    }
+
 }

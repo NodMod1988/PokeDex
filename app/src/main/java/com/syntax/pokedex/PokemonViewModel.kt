@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.syntax.pokedex.data.Repository
 import com.syntax.pokedex.data.local.getDatabase
+import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.model.pokemon.PokemonList
 import com.syntax.pokedex.data.remote.PokeApi
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
 
     private val database = getDatabase(application)
 
-    private val repository = Repository(PokeApi,database)
+    private val repository = Repository(PokeApi, database)
     val pokeList = repository.pokemons
 
     private val _loading = MutableLiveData<ApiStatus>()
@@ -29,6 +30,12 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         get() = _loading
 
     val pokemon = repository.pokemon
+
+    private val _pokemonLoaded = MutableLiveData<Boolean>(false)
+    val pokemonLoaded: LiveData<Boolean>
+        get() = _pokemonLoaded
+
+    val allPokemon = repository.allPokemon
 
 
     fun loadPokeList() {
@@ -42,17 +49,31 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
                 _loading.value = ApiStatus.ERROR
             }
         }
+
     }
 
-    fun loadPokeDetails(name: String){
+    fun loadPokeDetails(name: String) {
         viewModelScope.launch {
             try {
                 _loading.value = ApiStatus.LOADING
                 repository.loadPokemon(name)
                 _loading.value = ApiStatus.DONE
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e(TAG, "Error loading detail data from API: $e")
             }
+        }
+    }
+
+    fun loadAllPokemonDetails() {
+        viewModelScope.launch {
+
+            try {
+                repository.loadAllPokeDetails(pokeList.value!!)
+                _pokemonLoaded.value = true
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading all poke details: $e")
+            }
+
         }
     }
 }

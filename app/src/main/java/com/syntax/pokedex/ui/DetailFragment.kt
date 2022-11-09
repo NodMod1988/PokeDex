@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import coil.load
 import com.syntax.pokedex.PokemonViewModel
+import com.syntax.pokedex.data.model.pokemon.Types
 import com.syntax.pokedex.databinding.FragmentDetailBinding
 
 
@@ -43,6 +44,7 @@ class DetailFragment: Fragment() {
                     binding.txtPokeHeight.text = it.height.toString()
                     binding.txtPokeWeight.text = it.weight.toString()
                     binding.txtPokeName.text = it.name
+                    binding.txtPokeType.text = it.types.toString()
                 }
             )
         }

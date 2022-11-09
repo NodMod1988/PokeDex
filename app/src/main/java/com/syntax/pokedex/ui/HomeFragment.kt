@@ -8,11 +8,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.syntax.pokedex.ApiStatus
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.adapter.HomeAdapter
 import com.syntax.pokedex.databinding.FragmentHomeBinding
 import java.util.*
 
+enum class ApiStatus { LOADING, DONE, ERROR }
 
 class HomeFragment: Fragment() {
 
@@ -38,8 +40,16 @@ class HomeFragment: Fragment() {
         val homeAdapter = HomeAdapter()
         binding.pokeRecycler.adapter = homeAdapter
 
+        viewModel.loading.observe(
+            viewLifecycleOwner,
+            Observer {
+                if(it == ApiStatus.DONE && !viewModel.pokemonLoaded.value!!){
+                    viewModel.loadAllPokemonDetails()
+                }
+            }
+        )
 
-        viewModel.pokeList.observe(
+        viewModel.allPokemon.observe(
             viewLifecycleOwner,
             Observer {
                 homeAdapter.submitList(it)

@@ -20,14 +20,14 @@ import com.syntax.pokedex.data.model.pokemon.PokemonList
 import com.syntax.pokedex.data.remote.PokeApi
 import com.syntax.pokedex.ui.HomeFragmentDirections
 
-class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
-    private var dataset = listOf<PokemonList>()
+    private var dataset = listOf<Pokemon>()
 
-    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.txt_pokename)
         val image: ImageView = view.findViewById(R.id.img_pokemon)
-        val layout: ConstraintLayout= view.findViewById(R.id.layout_pokemon)
+        val layout: ConstraintLayout = view.findViewById(R.id.layout_pokemon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -37,23 +37,28 @@ class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
         return ItemViewHolder(itemLayout)
     }
 
-    fun submitList(list: List<PokemonList>) {
+    fun submitList(list: List<Pokemon>) {
         dataset = list
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item: PokemonList = dataset[position]
+        val item: Pokemon = dataset[position]
 
 
         holder.title.text = item.name
 
         //Setzt die image Url auf die jeweilige Position und lädt das bild
 
-        holder.image.load(item.url)
+        if (item.sprites.other.officialArtwork.front_default != null) {
+            holder.image.load(item.sprites.other.officialArtwork.front_default)
+        }else{
+            // Todo default bild in ressources anlegen
+        }
 
-        holder.layout.setOnClickListener{
-            holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.name))
+        holder.layout.setOnClickListener {
+            holder.itemView.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.name))
         }
 
     }

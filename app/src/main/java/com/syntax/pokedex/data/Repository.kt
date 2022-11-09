@@ -18,6 +18,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     val pokemon: LiveData<Pokemon>
         get() = _pokemon
 
+    private val _allPokemon = MutableLiveData<List<Pokemon>>()
+    val allPokemon: LiveData<List<Pokemon>>
+        get() = _allPokemon
+
     suspend fun loadPokemons() {
         try {
             var response = api.retrofitservice.getPokemonList()
@@ -32,6 +36,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         }catch (e:Exception){
             Log.e("Repository", e.message.toString())
         }
+
     }
 
 
@@ -43,6 +48,19 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         }catch (e:Exception){
             Log.e("Repository", e.message.toString())
         }
+    }
+
+
+    suspend fun loadAllPokeDetails(pokemonList:List<PokemonList>){
+        val allPokemon:  MutableList<Pokemon> = mutableListOf()
+
+        for (pokemon in pokemonList){
+            val poke = api.retrofitservice.getPokemon(pokemon.name.lowercase())
+            // Todo daten in db spielen
+            allPokemon.add(poke)
+            println(pokemon.name + " loaded")
+        }
+        _allPokemon.value = allPokemon
     }
 
 }

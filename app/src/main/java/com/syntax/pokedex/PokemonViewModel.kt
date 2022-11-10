@@ -2,15 +2,12 @@ package com.syntax.pokedex
 
 import android.app.Application
 import android.util.Log
-import android.widget.SearchView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.syntax.pokedex.data.Repository
 import com.syntax.pokedex.data.local.getDatabase
-import com.syntax.pokedex.data.model.pokemon.Pokemon
-import com.syntax.pokedex.data.model.pokemon.PokemonList
 import com.syntax.pokedex.data.remote.PokeApi
 import kotlinx.coroutines.launch
 
@@ -66,7 +63,6 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
 
     fun loadAllPokemonDetails() {
         viewModelScope.launch {
-
             try {
                 repository.loadAllPokeDetails(pokeList.value!!)
                 _pokemonLoaded.value = true

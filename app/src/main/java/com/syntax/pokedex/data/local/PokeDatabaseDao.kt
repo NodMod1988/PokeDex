@@ -5,16 +5,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
-import com.syntax.pokedex.data.model.pokemon.PokemonList
+import com.syntax.pokedex.data.model.PokemonListItem
 
 @Dao
 interface PokeDatabaseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(pokemonList:List<PokemonList>)
+    suspend fun insertAll(pokemonList:List<PokemonListItem>)
 
-    @Query("SELECT * from PokemonList")
-    fun getAll(): LiveData<List<PokemonList>>
+    @Query("SELECT * from PokemonListItem")
+    fun getAll(): LiveData<List<PokemonListItem>>
 
 }

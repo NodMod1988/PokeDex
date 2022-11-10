@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.syntax.pokedex.data.model.pokemon.PokemonList
+import com.syntax.pokedex.data.model.PokemonListItem
 
-@Database(entities = [PokemonList::class], version = 1)
+@Database(entities = [PokemonListItem::class], version = 1)
 abstract class PokeDatabase: RoomDatabase() {
     abstract val pokeDatabaseDao: PokeDatabaseDao
 }

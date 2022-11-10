@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.syntax.pokedex.data.local.PokeDatabase
+import com.syntax.pokedex.data.model.PokemonListItem
 import com.syntax.pokedex.data.model.pokemon.Pokemon
-import com.syntax.pokedex.data.model.pokemon.PokemonList
 import com.syntax.pokedex.data.remote.PokeApi
 
 class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
-    private val _pokemons = MutableLiveData<List<PokemonList>>()
-    val pokemons: LiveData<List<PokemonList>>
+    private val _pokemons = MutableLiveData<List<PokemonListItem>>()
+    val pokemons: LiveData<List<PokemonListItem>>
         get() = _pokemons
 
     private val _pokemon = MutableLiveData<Pokemon>()
@@ -51,9 +51,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     }
 
 
-    suspend fun loadAllPokeDetails(pokemonList:List<PokemonList>){
+    suspend fun loadAllPokeDetails(pokemonList:List<PokemonListItem>){
         val allPokemon:  MutableList<Pokemon> = mutableListOf()
 
+        // Todo falls daten in der db, db holen ansonsten api ->
         for (pokemon in pokemonList){
             val poke = api.retrofitservice.getPokemon(pokemon.name.lowercase())
             // Todo daten in db spielen

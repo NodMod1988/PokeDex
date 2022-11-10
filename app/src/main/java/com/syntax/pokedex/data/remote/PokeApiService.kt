@@ -31,9 +31,6 @@ interface PokeApiService {
     @GET("pokemon/{name}")
     suspend fun getPokemon(@Path("name") name: String): Pokemon
 
-    @GET("pokemon-species?limit=100000&offset=0")
-    suspend fun getPokemonSpecies(): DataSource
-
     @GET("pokemon-species/{name}")
     suspend fun getPokemonSpecie(@Path("name") name: String): PokemonSpecies
 }

@@ -20,7 +20,6 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     private val database = getDatabase(application)
 
     private val repository = Repository(PokeApi, database)
-    val pokeList = repository.pokemons
 
     private val _loading = MutableLiveData<ApiStatus>()
     val loading: LiveData<ApiStatus>
@@ -39,7 +38,7 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             try {
                 _loading.value = ApiStatus.LOADING
-                repository.loadPokemons()
+                repository.getPokemonData()
                 _loading.value = ApiStatus.DONE
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading list data from API: $e")
@@ -49,27 +48,4 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
 
     }
 
-    fun loadPokeDetails(name: String) {
-        viewModelScope.launch {
-            try {
-                _loading.value = ApiStatus.LOADING
-                repository.loadPokemon(name)
-                _loading.value = ApiStatus.DONE
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading detail data from API: $e")
-            }
-        }
-    }
-
-    fun loadAllPokemonDetails() {
-        viewModelScope.launch {
-            try {
-                repository.loadAllPokeDetails(pokeList.value!!)
-                _pokemonLoaded.value = true
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading all poke details: $e")
-            }
-
-        }
-    }
 }

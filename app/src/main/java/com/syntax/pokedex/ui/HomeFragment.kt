@@ -40,14 +40,16 @@ class HomeFragment: Fragment() {
         val homeAdapter = HomeAdapter()
         binding.pokeRecycler.adapter = homeAdapter
 
-        viewModel.loading.observe(
+/*        viewModel.loading.observe(
             viewLifecycleOwner,
             Observer {
                 if(it == ApiStatus.DONE && !viewModel.pokemonLoaded.value!!){
                     viewModel.loadAllPokemonDetails()
                 }
             }
-        )
+        )*/
+
+
 
         viewModel.allPokemon.observe(
             viewLifecycleOwner,

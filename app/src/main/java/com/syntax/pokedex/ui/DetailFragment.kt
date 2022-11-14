@@ -34,7 +34,7 @@ class DetailFragment: Fragment() {
         val name: String? = requireArguments().getString("name")
 
 
-        if (name != null) {
+        /*if (name != null) {
             viewModel.loadPokeDetails(name)
             viewModel.pokemon.observe(
                 viewLifecycleOwner,
@@ -47,7 +47,7 @@ class DetailFragment: Fragment() {
                     binding.txtPokeType.text = it.types.toString()
                 }
             )
-        }
+        }*/
 
     }
 }

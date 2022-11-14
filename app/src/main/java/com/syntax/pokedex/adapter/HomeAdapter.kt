@@ -10,13 +10,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.syntax.pokedex.R
+import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.model.PokemonListItem
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.ui.HomeFragmentDirections
 
 class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
-    private var dataset = listOf<Pokemon>()
+    private var dataset = listOf<DatabasePokemon>()
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.txt_pokename)
@@ -31,21 +32,21 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
         return ItemViewHolder(itemLayout)
     }
 
-    fun submitList(list: List<Pokemon>) {
+    fun submitList(list: List<DatabasePokemon>) {
         dataset = list
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item: Pokemon = dataset[position]
+        val item: DatabasePokemon = dataset[position]
 
 
         holder.title.text = item.name
 
         //Setzt die image Url auf die jeweilige Position und lädt das bild
 
-        if (item.sprites.other.officialArtwork.front_default != null) {
-            holder.image.load(item.sprites.other.officialArtwork.front_default)
+        if (item.picture != null) {
+            holder.image.load(item.picture)
         }else{
             // Todo default bild in ressources anlegen
         }

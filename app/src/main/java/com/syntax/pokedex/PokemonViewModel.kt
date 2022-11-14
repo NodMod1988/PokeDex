@@ -25,13 +25,12 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val loading: LiveData<ApiStatus>
         get() = _loading
 
-    val pokemon = repository.pokemon
+    val pokemon = repository.pokemonList
 
     private val _pokemonLoaded = MutableLiveData<Boolean>(false)
     val pokemonLoaded: LiveData<Boolean>
         get() = _pokemonLoaded
 
-    val allPokemon = repository.allPokemon
 
 
     fun loadPokeList() {
@@ -45,7 +44,5 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
                 _loading.value = ApiStatus.ERROR
             }
         }
-
     }
-
 }

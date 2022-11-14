@@ -15,7 +15,7 @@ interface PokeDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllPokemon(pokemonList:List<DatabasePokemon>)
 
-    /*@Query("SELECT * from Pokemon")
-    fun getAllPokemon(): LiveData<List<Pokemon>>*/
+    @Query("SELECT * from DatabasePokemon")
+    fun getAll(): LiveData<List<DatabasePokemon>>
 
 }

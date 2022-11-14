@@ -51,7 +51,7 @@ class HomeFragment: Fragment() {
 
 
 
-        viewModel.allPokemon.observe(
+        viewModel.pokemon.observe(
             viewLifecycleOwner,
             Observer {
                 homeAdapter.submitList(it)

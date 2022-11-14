@@ -23,9 +23,11 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     val pokemon: LiveData<Pokemon>
         get() = _pokemon
 
-    private val _allPokemon = MutableLiveData<List<Pokemon>>()
+    val pokemonList = database.pokeDatabaseDao.getAll()
+
+/*    private val _allPokemon = MutableLiveData<List<Pokemon>>()
     val allPokemon: LiveData<List<Pokemon>>
-        get() = _allPokemon
+        get() = _allPokemon*/
 
 /*    suspend fun getPokemons() {
         try {
@@ -91,7 +93,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     }
 
 
-    suspend fun loadAllPokeDetails(pokemonList:List<PokemonListItem>){
+/*    suspend fun loadAllPokeDetails(pokemonList:List<PokemonListItem>){
         val allPokemon:  MutableList<Pokemon> = mutableListOf()
         // Todo falls daten in der db, db holen ansonsten api ->
         for (pokemon in pokemonList){
@@ -102,6 +104,6 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             println(pokemon.name + " loaded")
         }
         _allPokemon.value = allPokemon
-    }
+    }*/
 
 }

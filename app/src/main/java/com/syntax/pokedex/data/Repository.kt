@@ -9,68 +9,42 @@ import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.model.PokemonListItem
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.remote.PokeApi
+import okhttp3.internal.threadName
 
 class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
-
-   /* private val _pokemons = MutableLiveData<List<PokemonListItem>>()
-    val pokemons: LiveData<List<PokemonListItem>>
-        get() = _pokemons*/
-
-
-
-   private val _pokemon = MutableLiveData<Pokemon>()
+    private val _pokemon = MutableLiveData<Pokemon>()
     val pokemon: LiveData<Pokemon>
         get() = _pokemon
 
     val pokemonList = database.pokeDatabaseDao.getAll()
 
-/*    private val _allPokemon = MutableLiveData<List<Pokemon>>()
-    val allPokemon: LiveData<List<Pokemon>>
-        get() = _allPokemon*/
 
-/*    suspend fun getPokemons() {
-        try {
-            var response = api.retrofitservice.getPokemonList()
-
-            for(i in response.results.indices){
-                response.results[i].url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png"
-                response.results[i].name = response.results[i].name.capitalize()
-            }
-
-            //_pokemons.value = response.results
-            database.pokeDatabaseDao.insertAllPokemonListItem(response.results)
-        }catch (e:Exception){
-            Log.e("Repository", e.message.toString())
-        }
-
-    }*/
-
-    suspend fun getPokemonData(){
+    suspend fun getPokemonData() {
         try {
             var response = api.retrofitservice.getPokemonList()
             var allPokemon: MutableList<Pokemon> = mutableListOf()
-            for (result in response.results){
+            for (result in response.results) {
                 try {
                     val pokemon = api.retrofitservice.getPokemon(result.name)
                     allPokemon.add(pokemon)
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     Log.e("Repository", "A Error Occured: $e")
                 }
 
             }
             parsePokemon(allPokemon)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.e("Repository", "A Error Occured: $e")
         }
     }
 
     suspend fun parsePokemon(allPokemon: MutableList<Pokemon>) {
         val newPokemonList = mutableListOf<DatabasePokemon>()
-        for(pokemon in allPokemon){
+        for (pokemon in allPokemon) {
             val databasePokemon = DatabasePokemon(
                 pokemon.id,
-                pokemon.sprites.other.officialArtwork.front_default ?:" ",
+                pokemon.sprites.other.officialArtwork.front_default ?: " ",
                 pokemon.name
 
             )
@@ -80,17 +54,18 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         database.pokeDatabaseDao.insertAllPokemon(newPokemonList)
     }
 
-
-    suspend fun loadPokemon(name: String){
+    suspend fun getPokemonByName(pokemonName: String): DatabasePokemon {
         try {
-            val response = api.retrofitservice.getPokemon(name.lowercase())
-            _pokemon.value = response
 
+            return database.pokeDatabaseDao.getPokemonDetailsByName(pokemonName)
 
-        }catch (e:Exception){
-            Log.e("Repository", e.message.toString())
+        } catch (e: Exception) {
+            Log.e("Repository", "An error occured: $e")
         }
+        return DatabasePokemon(1337,"kein foto fuer dich","beim nächsten mal")
     }
+
+
 
 
 /*    suspend fun loadAllPokeDetails(pokemonList:List<PokemonListItem>){

@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.syntax.pokedex.data.Repository
+import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.local.getDatabase
 import com.syntax.pokedex.data.remote.PokeApi
 import kotlinx.coroutines.launch
@@ -31,6 +32,10 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val pokemonLoaded: LiveData<Boolean>
         get() = _pokemonLoaded
 
+    private val _pokemonDetails = MutableLiveData<DatabasePokemon>()
+    val pokemonDetails: LiveData<DatabasePokemon>
+        get() =  _pokemonDetails
+
 
 
     fun loadPokeList() {
@@ -43,6 +48,12 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
                 Log.e(TAG, "Error loading list data from API: $e")
                 _loading.value = ApiStatus.ERROR
             }
+        }
+    }
+
+    fun loadPokeDetails(name: String){
+        viewModelScope.launch {
+            _pokemonDetails.value = repository.getPokemonByName(name)
         }
     }
 }

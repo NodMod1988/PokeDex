@@ -32,24 +32,11 @@ class HomeFragment: Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val homeAdapter = HomeAdapter()
         binding.pokeRecycler.adapter = homeAdapter
-
-/*        viewModel.loading.observe(
-            viewLifecycleOwner,
-            Observer {
-                if(it == ApiStatus.DONE && !viewModel.pokemonLoaded.value!!){
-                    viewModel.loadAllPokemonDetails()
-                }
-            }
-        )*/
-
-
 
         viewModel.pokemon.observe(
             viewLifecycleOwner,
@@ -57,7 +44,5 @@ class HomeFragment: Fragment() {
                 homeAdapter.submitList(it)
             }
         )
-
-
     }
 }

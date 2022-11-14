@@ -31,7 +31,18 @@ class DetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val name: String? = requireArguments().getString("name")
+        val name: String = requireArguments().getString("name", "test")
+
+        viewModel.loadPokeDetails(name)
+
+        viewModel.pokemonDetails.observe(
+            viewLifecycleOwner,
+            Observer {
+                binding.imgPokemonPic.load(it.picture)
+                binding.txtPokeId.text = it.pokeId.toString()
+                binding.txtPokeName.text = it.name
+            }
+        )
 
 
         /*if (name != null) {

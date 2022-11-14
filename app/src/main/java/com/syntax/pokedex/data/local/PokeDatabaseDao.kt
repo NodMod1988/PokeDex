@@ -18,4 +18,7 @@ interface PokeDatabaseDao {
     @Query("SELECT * from DatabasePokemon")
     fun getAll(): LiveData<List<DatabasePokemon>>
 
+    @Query("SELECT * FROM DatabasePokemon WHERE name = :pokemonName")
+    suspend fun getPokemonDetailsByName(pokemonName: String): DatabasePokemon
+
 }

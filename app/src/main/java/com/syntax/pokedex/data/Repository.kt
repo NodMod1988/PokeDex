@@ -68,7 +68,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         for(pokemon in allPokemon){
             val databasePokemon = DatabasePokemon(
                 pokemon.id,
-                pokemon.sprites.other.officialArtwork.front_default!!,
+                pokemon.sprites.other.officialArtwork.front_default ?:" ",
                 pokemon.name
 
             )

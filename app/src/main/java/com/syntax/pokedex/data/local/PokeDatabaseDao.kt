@@ -21,7 +21,7 @@ interface PokeDatabaseDao {
     @Query("SELECT * FROM DatabasePokemon WHERE name = :pokemonName")
     suspend fun getPokemonDetailsByName(pokemonName: String): DatabasePokemon
 
-    @Query("SELECT picture, name FROM DatabasePokemon WHERE name LIKE :pokemonName")
+    @Query("SELECT * FROM DatabasePokemon WHERE name LIKE :pokemonName || '%'")
     suspend fun searchPokemon(pokemonName: String): List<DatabasePokemon>
 
 }

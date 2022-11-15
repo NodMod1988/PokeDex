@@ -17,6 +17,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     val pokemon: LiveData<Pokemon>
         get() = _pokemon
 
+    private val _pokemonByName = MutableLiveData<List<DatabasePokemon>>()
+    val pokemonByName: LiveData<List<DatabasePokemon>>
+        get() = _pokemonByName
+
     val pokemonList = database.pokeDatabaseDao.getAll()
 
 
@@ -66,19 +70,11 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     }
 
 
+    suspend fun searchPokemonByName(pokemonName: String){
+        val result = database.pokeDatabaseDao.searchPokemon(pokemonName)
+        _pokemonByName.value = result
 
 
-/*    suspend fun loadAllPokeDetails(pokemonList:List<PokemonListItem>){
-        val allPokemon:  MutableList<Pokemon> = mutableListOf()
-        // Todo falls daten in der db, db holen ansonsten api ->
-        for (pokemon in pokemonList){
-            val poke = api.retrofitservice.getPokemon(pokemon.name.lowercase())
-            // Todo daten in db spielen
-            allPokemon.add(poke)
-
-            println(pokemon.name + " loaded")
-        }
-        _allPokemon.value = allPokemon
-    }*/
+    }
 
 }

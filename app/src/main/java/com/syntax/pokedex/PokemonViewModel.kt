@@ -27,6 +27,7 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         get() = _loading
 
     val pokemon = repository.pokemonList
+    val pokemonByName = repository.pokemonByName
 
     private val _pokemonLoaded = MutableLiveData<Boolean>(false)
     val pokemonLoaded: LiveData<Boolean>
@@ -54,6 +55,12 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     fun loadPokeDetails(name: String){
         viewModelScope.launch {
             _pokemonDetails.value = repository.getPokemonByName(name)
+        }
+    }
+
+    fun searchPokemon(name: String){
+        viewModelScope.launch {
+            repository.searchPokemonByName(name)
         }
     }
 }

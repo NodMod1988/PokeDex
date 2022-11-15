@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView.OnQueryTextListener
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -44,5 +45,32 @@ class HomeFragment: Fragment() {
                 homeAdapter.submitList(it)
             }
         )
+
+        viewModel.pokemonByName.observe(
+            viewLifecycleOwner,
+            Observer {
+                val adapter = HomeAdapter()
+                adapter.submitList(it)
+                binding.pokeRecycler.adapter = adapter
+
+
+            }
+        )
+
+        binding.searchPokemon.setOnQueryTextListener(object:OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchPokemon(newText!!)
+                return true
+            }
+        })
     }
+
+
+
+
 }

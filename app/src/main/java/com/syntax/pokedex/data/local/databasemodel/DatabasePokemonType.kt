@@ -4,10 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
- data class DatabasePokemon(
+data class DatabasePokemonType(
 
     @PrimaryKey(autoGenerate = true)
-    var pokeId: Int,
-    val picture: String,
-    val name: String,
+    var typeId: Int,
+    val type: String
 )

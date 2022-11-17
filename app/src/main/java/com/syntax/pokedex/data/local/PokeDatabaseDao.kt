@@ -16,12 +16,15 @@ interface PokeDatabaseDao {
     suspend fun insertAllPokemon(pokemonList:List<DatabasePokemon>)
 
     @Query("SELECT * from DatabasePokemon")
-    fun getAll(): LiveData<List<DatabasePokemon>>
+    fun getAll(): List<DatabasePokemon>
 
     @Query("SELECT * FROM DatabasePokemon WHERE name = :pokemonName")
     suspend fun getPokemonDetailsByName(pokemonName: String): DatabasePokemon
 
     @Query("SELECT * FROM DatabasePokemon WHERE name LIKE :pokemonName || '%'")
     suspend fun searchPokemon(pokemonName: String): List<DatabasePokemon>
+
+    @Query("SELECT (SELECT COUNT(*) FROM DatabasePokemon) == 0")
+    suspend fun checkIsDbEmpty():Boolean
 
 }

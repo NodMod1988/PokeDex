@@ -46,14 +46,13 @@ class HomeFragment: Fragment() {
             }
         )
 
+
         viewModel.pokemonByName.observe(
             viewLifecycleOwner,
             Observer {
                 val adapter = HomeAdapter()
                 adapter.submitList(it)
                 binding.pokeRecycler.adapter = adapter
-
-
             }
         )
 

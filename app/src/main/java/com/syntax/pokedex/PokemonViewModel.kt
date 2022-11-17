@@ -29,14 +29,10 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val pokemon = repository.pokemonList
     val pokemonByName = repository.pokemonByName
 
-    private val _pokemonLoaded = MutableLiveData<Boolean>(false)
-    val pokemonLoaded: LiveData<Boolean>
-        get() = _pokemonLoaded
 
     private val _pokemonDetails = MutableLiveData<DatabasePokemon>()
     val pokemonDetails: LiveData<DatabasePokemon>
         get() =  _pokemonDetails
-
 
 
     fun loadPokeList() {

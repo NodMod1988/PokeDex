@@ -59,4 +59,6 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
             repository.searchPokemonByName(name)
         }
     }
+
+
 }

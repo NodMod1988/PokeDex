@@ -32,36 +32,35 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         get() = _pokemonList
 
 
-
     suspend fun getPokemonData() {
 
         var isEmpty = database.pokeDatabaseDao.checkIsDbEmpty()
 
-        if(isEmpty){
+        if (isEmpty) {
             Log.i("Repository", "Database is Empty")
             try {
                 var response = api.retrofitservice.getPokemonList()
                 var allPokemon: MutableList<Pokemon> = mutableListOf()
                 for (result in response.results) {
-
                     try {
                         val pokemon = api.retrofitservice.getPokemon(result.name)
                         allPokemon.add(pokemon)
                     } catch (e: Exception) {
                         Log.e("Repository", "A Error Occured: $e")
                     }
-
                 }
                 parsePokemon(allPokemon)
             } catch (e: Exception) {
                 Log.e("Repository", "A Error Occured: $e")
             }
-        }else{
-            //todo aus der datenbank
+        } else {
+            //todo daten aus der datenbank
             Log.i("Repository", "In the database")
+            _pokemonList.postValue(getPokemonsFromDatabase()!!)
         }
 
     }
+
 
     suspend fun parsePokemon(allPokemon: MutableList<Pokemon>) {
         val newPokemonList = mutableListOf<DatabasePokemon>()
@@ -78,6 +77,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         _pokemonList.postValue(newPokemonList)
     }
 
+
     suspend fun getPokemonByName(pokemonName: String): DatabasePokemon {
         try {
 
@@ -86,11 +86,19 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         } catch (e: Exception) {
             Log.e("Repository", "An error occured: $e")
         }
-        return DatabasePokemon(1337,"kein foto fuer dich","beim nächsten mal")
+        return DatabasePokemon(
+            1337,
+            "ich habe heute kein foto fuer dich",
+            "beim nächsten mal vielleicht"
+        )
+    }
+
+    suspend fun getPokemonsFromDatabase(): List<DatabasePokemon> {
+        return database.pokeDatabaseDao.getAll()
     }
 
 
-    suspend fun searchPokemonByName(pokemonName: String){
+    suspend fun searchPokemonByName(pokemonName: String) {
         val result = database.pokeDatabaseDao.searchPokemon(pokemonName)
         _pokemonByName.value = result
     }

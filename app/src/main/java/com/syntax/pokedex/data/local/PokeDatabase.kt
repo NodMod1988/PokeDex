@@ -23,8 +23,7 @@ fun getDatabase(context: Context): PokeDatabase {
                 context.applicationContext,
                 PokeDatabase::class.java,
                 "pokemon_database"
-            )
-                .build()
+            ).allowMainThreadQueries().build()
         }
     }
     return INSTANCE

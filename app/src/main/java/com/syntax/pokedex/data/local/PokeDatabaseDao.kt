@@ -16,7 +16,7 @@ interface PokeDatabaseDao {
     suspend fun insertAllPokemon(pokemonList:List<DatabasePokemon>)
 
     @Query("SELECT * from DatabasePokemon")
-    fun getAll(): List<DatabasePokemon>
+    suspend fun getAll():List<DatabasePokemon>
 
     @Query("SELECT * FROM DatabasePokemon WHERE name = :pokemonName")
     suspend fun getPokemonDetailsByName(pokemonName: String): DatabasePokemon

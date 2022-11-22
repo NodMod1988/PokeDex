@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.R
 import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.model.PokemonListItem
@@ -44,6 +45,7 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
         holder.title.text = item.name
 
         //Setzt die image Url auf die jeweilige Position und lädt das bild
+
 
         if (item.picture != null) {
             holder.image.load(item.picture)

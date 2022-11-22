@@ -3,25 +3,16 @@ package com.syntax.pokedex.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Database
 import com.syntax.pokedex.data.local.PokeDatabase
 import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
-import com.syntax.pokedex.data.model.PokemonListItem
 import com.syntax.pokedex.data.model.pokemon.Pokemon
-import com.syntax.pokedex.data.model.pokemon.Type
-import com.syntax.pokedex.data.model.pokemon.Types
 import com.syntax.pokedex.data.remote.PokeApi
-import okhttp3.internal.threadName
 
 class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
     private val _pokemon = MutableLiveData<Pokemon>()
     val pokemon: LiveData<Pokemon>
         get() = _pokemon
-
-    private val _pokemonType = MutableLiveData<Type>()
-    val pokemonType: LiveData<Type>
-        get() = _pokemonType
 
     private val _pokemonByName = MutableLiveData<List<DatabasePokemon>>()
     val pokemonByName: LiveData<List<DatabasePokemon>>
@@ -46,19 +37,18 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
                         val pokemon = api.retrofitservice.getPokemon(result.name)
                         allPokemon.add(pokemon)
                     } catch (e: Exception) {
-                        Log.e("Repository", "A Error Occured: $e")
+                        Log.e("Repository", "A Error Occured1: $e")
                     }
                 }
                 parsePokemon(allPokemon)
             } catch (e: Exception) {
-                Log.e("Repository", "A Error Occured: $e")
+                Log.e("Repository", "A Error Occured2: $e")
             }
         } else {
-            //todo daten aus der datenbank
+            // nimmt sämtliche daten aus der datenbank
             Log.i("Repository", "In the database")
             _pokemonList.postValue(getPokemonsFromDatabase()!!)
         }
-
     }
 
 
@@ -68,7 +58,12 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             val databasePokemon = DatabasePokemon(
                 pokemon.id,
                 pokemon.sprites.other.officialArtwork.front_default ?: " ",
-                pokemon.name
+                pokemon.name,
+                pokemon.weight,
+                pokemon.types[0].type.name,
+                if (pokemon.types.size>1) pokemon.types[1].type.name else null,
+
+
             )
             newPokemonList.add(databasePokemon)
 
@@ -76,7 +71,6 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         database.pokeDatabaseDao.insertAllPokemon(newPokemonList)
         _pokemonList.postValue(newPokemonList)
     }
-
 
     suspend fun getPokemonByName(pokemonName: String): DatabasePokemon {
         try {
@@ -89,7 +83,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         return DatabasePokemon(
             1337,
             "ich habe heute kein foto fuer dich",
-            "beim nächsten mal vielleicht"
+            "beim nächsten mal vielleicht",
+            0,
+            "rot"
+            //"weiss"
         )
     }
 

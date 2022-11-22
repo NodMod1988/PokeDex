@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import coil.load
 import com.syntax.pokedex.PokemonViewModel
-import com.syntax.pokedex.data.model.pokemon.Types
 import com.syntax.pokedex.databinding.FragmentDetailBinding
 
 

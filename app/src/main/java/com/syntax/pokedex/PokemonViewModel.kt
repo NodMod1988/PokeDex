@@ -48,6 +48,8 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    // Todo api call machen! zB getTypeById
+
     fun loadPokeDetails(name: String){
         viewModelScope.launch {
             _pokemonDetails.value = repository.getPokemonByName(name)

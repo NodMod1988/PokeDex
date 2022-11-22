@@ -10,4 +10,7 @@ import androidx.room.PrimaryKey
     var pokeId: Int,
     val picture: String,
     val name: String,
+    val weight: Int,
+    val primaryType: String = "",
+    val secundaryType: String? = null
 )

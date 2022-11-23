@@ -26,7 +26,10 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val loading: LiveData<ApiStatus>
         get() = _loading
 
+    // todo beobachten für den splash loading screen
     val pokemon = repository.pokemonList
+
+
     val pokemonByName = repository.pokemonByName
 
 

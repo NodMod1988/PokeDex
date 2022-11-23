@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name = "normalColor">#AAA67F</color>
+    <color name = "rockColor">#B69E31</color>
+    <color name = "fightingColor">#C12239</color>
+    <color name = "ghostColor">#70559B</color>
+    <color name = "flyingColor">#A891EC</color>
+    <color name = "steelColor">#B7B9D0</color>
+    <color name = "poisonColor">#A43E9E</color>
+    <color name = "waterColor">#6493EB</color>
+    <color name = "groundColor">#DEC16B</color>
+    <color name = "grassColor">#74CB48</color>
+    <color name = "bugColor">#A7B723</color>
+    <color name = "psychicColor">#FB5584</color>
+    <color name = "fireColor">#F57D31</color>
+    <color name ="iceColor">#9AD6DF</color>
+    <color name = "electricColor">#F9CF30</color>
+    <color name = "darkColor">#75574C</color>
+    <color name ="dragonColor">#7037FF</color>
+    <color name = "fairyColor">#E69EAC</color>
 </resources>

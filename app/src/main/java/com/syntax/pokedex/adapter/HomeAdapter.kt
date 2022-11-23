@@ -1,5 +1,6 @@
 package com.syntax.pokedex.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.R
 import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.model.PokemonListItem
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.ui.HomeFragmentDirections
+import java.util.*
 
 class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
@@ -42,15 +45,18 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
         val item: DatabasePokemon = dataset[position]
 
 
-        holder.title.text = item.name
+        holder.title.text = item.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
 
         //Setzt die image Url auf die jeweilige Position und lädt das bild
 
 
         if (item.picture != null) {
-            holder.image.load(item.picture)
-        }else{
-            // Todo default bild in ressources anlegen
+            holder.image.load(item.picture){
+                transformations(RoundedCornersTransformation(10f))
+                error(R.drawable.ic_round_broken_image_24)
+                placeholder(R.drawable.ic_launcher_foreground)
+                crossfade(true)
+            }
         }
 
         holder.layout.setOnClickListener {

@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
     val picture: String,
     val name: String,
     val weight: Int,
+    val height: Int,
     val primaryType: String = "",
     val secundaryType: String? = null
 )

@@ -60,6 +60,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
                 pokemon.sprites.other.officialArtwork.front_default ?: " ",
                 pokemon.name,
                 pokemon.weight,
+                pokemon.height,
                 pokemon.types[0].type.name,
                 if (pokemon.types.size>1) pokemon.types[1].type.name else null,
 
@@ -85,8 +86,9 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             "ich habe heute kein foto fuer dich",
             "beim nächsten mal vielleicht",
             0,
-            "rot"
-            //"weiss"
+            131,
+            "rot",
+            null,
         )
     }
 

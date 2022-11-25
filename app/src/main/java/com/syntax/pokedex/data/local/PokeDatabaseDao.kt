@@ -1,6 +1,7 @@
 package com.syntax.pokedex.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -23,6 +24,13 @@ interface PokeDatabaseDao {
 
     @Query("SELECT (SELECT COUNT(*) FROM DatabasePokemon) == 0")
     suspend fun checkIsDbEmpty():Boolean
+
+    @Query("SELECT * FROM DatabasePokemon WHERE isFavorite = 1")
+    suspend fun getFavorite(): List<DatabasePokemon>
+
+    @Query("UPDATE DatabasePokemon SET isFavorite = :isFavorite WHERE name = :pokemonName")
+    suspend fun setFavorite(pokemonName: String, isFavorite: Boolean)
+
 
 
 }

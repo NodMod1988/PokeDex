@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import coil.load
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.R
+import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.databinding.FragmentDetailBinding
 
 
@@ -71,5 +72,6 @@ class DetailFragment: Fragment() {
 
             }
         )
+
     }
 }

@@ -66,5 +66,11 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    /*fun addToFavorites(pokemon: DatabasePokemon){
+        viewModelScope.launch {
+            repository.addToFavorites(pokemon)
+        }
+    }*/
+
 
 }

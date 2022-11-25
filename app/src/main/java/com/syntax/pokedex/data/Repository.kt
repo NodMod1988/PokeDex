@@ -63,7 +63,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
                 pokemon.height,
                 pokemon.types[0].type.name,
                 if (pokemon.types.size>1) pokemon.types[1].type.name else null,
-
+                false
 
             )
             newPokemonList.add(databasePokemon)
@@ -83,8 +83,8 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         }
         return DatabasePokemon(
             1337,
-            "ich habe heute kein foto fuer dich",
-            "beim nächsten mal vielleicht",
+            "ich habe heute leider kein foto fuer dich",
+            "SCHMATZ",
             0,
             131,
             "rot",
@@ -101,5 +101,9 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         val result = database.pokeDatabaseDao.searchPokemon(pokemonName)
         _pokemonByName.value = result
     }
+
+    /*suspend fun addToFavorites(pokemon: DatabasePokemon){
+        val result = database.pokeDatabaseDao.addToFavorites(pokemon)
+    }*/
 
 }

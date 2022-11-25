@@ -69,7 +69,6 @@ class DetailFragment: Fragment() {
                     }
                 )
 
-
             }
         )
 

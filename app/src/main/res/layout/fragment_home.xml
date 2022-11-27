@@ -19,7 +19,7 @@
             app:layout_constraintBottom_toTopOf="@+id/search_pokemon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/pokemonlogo"/>
+            android:src="@drawable/logo"/>
 
         <SearchView
             android:id="@+id/search_pokemon"

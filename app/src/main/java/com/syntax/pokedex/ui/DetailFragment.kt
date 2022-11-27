@@ -68,9 +68,61 @@ class DetailFragment: Fragment() {
 
                     }
                 )
+                binding.imgTypeOne.setImageResource(
+                    when(it.primaryType){
+                        "fire" -> R.drawable.fire
+                        "grass" -> R.drawable.grass
+                        "water" -> R.drawable.water
+                        "bug" -> R.drawable.bug
+                        "poison" -> R.drawable.poison
+                        "psychic" ->R.drawable.psychic
+                        "electric" -> R.drawable.electric
+                        "fighting" -> R.drawable.fighting
+                        "dragon" -> R.drawable.dragon
+                        "dark" -> R.drawable.dark
+                        "normal" -> R.drawable.normal
+                        "fairy" -> R.drawable.fairy
+                        "flying" -> R.drawable.flying
+                        "steel" -> R.drawable.steel
+                        "ice" -> R.drawable.ice
+                        "rock" -> R.drawable.rock
+                        "ghost" -> R.drawable.ghost
+                        else -> R.drawable.ground
+                    }
+                )
+
+                if(it.secundaryType!= null){
+                    binding.imgTypeTwo.setImageResource(
+                        when(it.secundaryType){
+                            "fire" -> R.drawable.fire
+                            "grass" -> R.drawable.grass
+                            "water" -> R.drawable.water
+                            "bug" -> R.drawable.bug
+                            "poison" -> R.drawable.poison
+                            "psychic" ->R.drawable.psychic
+                            "electric" -> R.drawable.electric
+                            "fighting" -> R.drawable.fighting
+                            "dragon" -> R.drawable.dragon
+                            "dark" -> R.drawable.dark
+                            "normal" -> R.drawable.normal
+                            "fairy" -> R.drawable.fairy
+                            "flying" -> R.drawable.flying
+                            "steel" -> R.drawable.steel
+                            "ice" -> R.drawable.ice
+                            "rock" -> R.drawable.rock
+                            "ghost" -> R.drawable.ghost
+                            "ground" -> R.drawable.ground
+                            else -> R.drawable.ground
+
+                        }
+                    )
+                }
+
+
 
             }
         )
 
     }
 }
+

@@ -1,5 +1,6 @@
 package com.syntax.pokedex.adapter
 
+import android.animation.ObjectAnimator
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +60,10 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
                 crossfade(true)
             }
         }
+
+        val animator = ObjectAnimator.ofFloat(holder.cardView, View.SCALE_Y,0f,1f)
+        animator.duration = 800
+        animator.start()
 
         when(item.primaryType){
             "fire" -> holder.cardView.setBackgroundResource(R.drawable.gradient_fire)

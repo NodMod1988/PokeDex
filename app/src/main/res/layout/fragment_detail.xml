@@ -112,6 +112,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/img_pokemonPic" />
 
+                <ImageView
+                    android:id="@+id/img_typeTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_typeOne"
+                    app:layout_constraintStart_toEndOf="@+id/img_typeOne"
+                    app:layout_constraintTop_toTopOf="@+id/img_typeOne"
+                    app:layout_constraintVertical_bias="0.84"
+                    app:srcCompat="@drawable/dark" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

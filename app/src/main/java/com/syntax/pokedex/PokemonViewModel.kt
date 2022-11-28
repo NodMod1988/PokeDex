@@ -29,6 +29,9 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     // todo beobachten für den splash loading screen
     val pokemon = repository.pokemonList
 
+    fun getFavorites(): List<DatabasePokemon>?{
+        return pokemon.value?.filter { it.isFavorite }
+    }
 
     val pokemonByName = repository.pokemonByName
 
@@ -71,6 +74,7 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
             repository.addToFavorites(pokemonName)
         }
     }
+
 
 
 }

@@ -67,6 +67,29 @@ class HomeFragment: Fragment() {
                 return true
             }
         })
+
+        var isClicked = false
+
+        binding.favorites.setOnClickListener {
+            if(!isClicked){
+                val adapter = HomeAdapter()
+                viewModel.getFavorites()?.let { it1 -> adapter.submitList(it1) }
+                binding.pokeRecycler.adapter = adapter
+                isClicked = true
+            }else{
+
+                val adapter = HomeAdapter()
+                viewModel.pokemon.value?.let { it1 -> adapter.submitList(it1) }
+                binding.pokeRecycler.adapter = adapter
+                isClicked = false
+
+            }
+
+
+        }
+
+
+
     }
 
 

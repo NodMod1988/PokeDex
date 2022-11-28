@@ -14,5 +14,11 @@ import androidx.room.PrimaryKey
     val height: Int,
     val primaryType: String = "",
     val secundaryType: String? = null,
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean = false,
+    val hp: Int,
+    val attack: Int,
+    val defense: Int,
+    val specialAttack: Int,
+    val specialDefense: Int,
+    val speed: Int
 )

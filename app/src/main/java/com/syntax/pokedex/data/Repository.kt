@@ -63,7 +63,13 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
                 pokemon.height,
                 pokemon.types[0].type.name,
                 if (pokemon.types.size>1) pokemon.types[1].type.name else null,
-                false
+                false,
+                pokemon.stats[0].base_stat,
+                pokemon.stats[1].base_stat,
+                pokemon.stats[2].base_stat,
+                pokemon.stats[3].base_stat,
+                pokemon.stats[4].base_stat,
+                pokemon.stats[5].base_stat
 
             )
             newPokemonList.add(databasePokemon)
@@ -89,6 +95,13 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             131,
             "rot",
             null,
+            false,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
         )
     }
 

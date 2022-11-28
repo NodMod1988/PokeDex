@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -42,8 +43,8 @@ class DetailFragment: Fragment() {
             viewLifecycleOwner,
             Observer {
                 binding.imgPokemonPic.load(it.picture)
-                binding.txtPokeId.text = it.pokeId.toString()
-                binding.txtPokeName.text = it.name
+                binding.txtPokeId.text = "# "+ it.pokeId.toString()
+                binding.txtPokeName.text = it.name.capitalize()
                 binding.cvPokemonDetail.setBackgroundResource(
                     when(it.primaryType){
                         "fire" -> R.drawable.gradient_fire
@@ -116,6 +117,8 @@ class DetailFragment: Fragment() {
 
                         }
                     )
+                }else{
+                    binding.imgTypeTwo.isInvisible = true
                 }
 
 

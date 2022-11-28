@@ -28,24 +28,30 @@
                     android:id="@+id/txt_pokeWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:layout_editor_absoluteX="85dp"
-                    tools:layout_editor_absoluteY="477dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_pokeHeight"
                     tools:text="Weight" />
 
                 <TextView
                     android:id="@+id/txt_pokeType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:layout_editor_absoluteX="189dp"
-                    tools:layout_editor_absoluteY="518dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_typeTwo"
                     tools:text="Type" />
 
                 <TextView
                     android:id="@+id/txt_pokeHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:layout_editor_absoluteX="189dp"
-                    tools:layout_editor_absoluteY="467dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_pokeType"
                     tools:text="Height" />
 
                 <TextView
@@ -108,6 +114,22 @@
                     app:layout_constraintStart_toEndOf="@+id/img_typeOne"
                     app:layout_constraintTop_toBottomOf="@+id/img_pokemonPic"
                     app:srcCompat="@drawable/dark" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="183dp"
+                    tools:layout_editor_absoluteY="343dp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar3"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="183dp"
+                    tools:layout_editor_absoluteY="411dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

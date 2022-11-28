@@ -31,6 +31,9 @@ interface PokeDatabaseDao {
     @Query("UPDATE DatabasePokemon SET isFavorite = :isFavorite WHERE name = :pokemonName")
     suspend fun setFavorite(pokemonName: String, isFavorite: Boolean)
 
+    @Query("SELECT * FROM DATABASEPOKEMON WHERE primaryType = :primaryType")
+    suspend fun getByPrimarytype(primaryType: String):List<DatabasePokemon>
+
 
 
 }

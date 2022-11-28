@@ -124,8 +124,11 @@ class DetailFragment: Fragment() {
                 }
 
 
-
+                binding.addBtn.setOnClickListener {
+                    viewModel.addToFavorites(name)
+                }
             }
+
         )
 
     }

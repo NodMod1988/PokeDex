@@ -115,8 +115,8 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         _pokemonByName.value = result
     }
 
-    /*suspend fun addToFavorites(pokemon: DatabasePokemon){
-        val result = database.pokeDatabaseDao.addToFavorites(pokemon)
-    }*/
+    suspend fun addToFavorites(pokemonName: String){
+        database.pokeDatabaseDao.setFavorite(pokemonName, true)
+    }
 
 }

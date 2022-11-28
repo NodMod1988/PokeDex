@@ -26,12 +26,12 @@ interface PokeDatabaseDao {
     suspend fun checkIsDbEmpty():Boolean
 
     @Query("SELECT * FROM DatabasePokemon WHERE isFavorite = 1")
-    suspend fun getFavorite(): List<DatabasePokemon>
+    suspend fun getFavorites(): List<DatabasePokemon>
 
     @Query("UPDATE DatabasePokemon SET isFavorite = :isFavorite WHERE name = :pokemonName")
     suspend fun setFavorite(pokemonName: String, isFavorite: Boolean)
 
-    @Query("SELECT * FROM DATABASEPOKEMON WHERE primaryType = :primaryType")
+    @Query("SELECT * FROM DatabasePokemon WHERE primaryType = :primaryType")
     suspend fun getByPrimarytype(primaryType: String):List<DatabasePokemon>
 
 

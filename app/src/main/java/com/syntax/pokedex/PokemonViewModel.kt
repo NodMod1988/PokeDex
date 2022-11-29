@@ -75,6 +75,12 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun removeFavorite(pokemonName: String){
+        viewModelScope.launch {
+            repository.removeFavorite(pokemonName)
+        }
+    }
+
 
 
 }

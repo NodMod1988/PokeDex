@@ -119,6 +119,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         database.pokeDatabaseDao.setFavorite(pokemonName, true)
     }
 
+    suspend fun removeFavorite(pokemonName: String){
+        database.pokeDatabaseDao.setFavorite(pokemonName, false)
+    }
+
     suspend fun getFavorites(): List<DatabasePokemon>{
         return database.pokeDatabaseDao.getFavorites()
     }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -123,10 +124,25 @@ class DetailFragment: Fragment() {
                     binding.imgTypeTwo.isInvisible = true
                 }
 
-
-                binding.addBtn.setOnClickListener {
-                    viewModel.addToFavorites(name)
+                if(it.isFavorite){
+                    binding.removeBtn.isVisible = true
+                    binding.addBtn.isVisible = false
+                    binding.removeBtn.setOnClickListener {
+                        viewModel.removeFavorite(name)
+                        binding.removeBtn.isVisible = false
+                        binding.addBtn.isVisible = true
+                    }
+                }else if(!it.isFavorite){
+                    binding.removeBtn.isVisible = false
+                    binding.addBtn.isVisible = true
+                    binding.addBtn.setOnClickListener {
+                        viewModel.addToFavorites(name)
+                        binding.removeBtn.isVisible = true
+                        binding.addBtn.isVisible = false
+                    }
                 }
+
+
                 binding.hpBar.progress = it.hp
                 binding.attackBar.progress = it.attack
                 binding.defenseBar.progress = it.defense

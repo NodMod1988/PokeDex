@@ -78,16 +78,6 @@
                     tools:text="PokeId" />
 
                 <ImageView
-                    android:id="@+id/addBtn"
-                    android:layout_width="81dp"
-                    android:layout_height="73dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_add_24" />
-
-                <ImageView
                     android:id="@+id/img_typeOne"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -231,6 +221,28 @@
                     app:layout_constraintEnd_toStartOf="@+id/speedBar"
                     app:layout_constraintTop_toTopOf="@+id/speedBar"
                     tools:text="Speed" />
+
+                <ImageView
+                    android:id="@+id/removeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="36dp"
+                    android:layout_marginBottom="660dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_bookmark_remove_24" />
+
+                <ImageView
+                    android:id="@+id/addBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="36dp"
+                    android:layout_marginBottom="660dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_bookmark_add_24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

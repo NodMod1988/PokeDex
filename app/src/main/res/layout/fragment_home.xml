@@ -38,10 +38,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_pokemon"
+            app:layout_constraintTop_toBottomOf="@+id/pokeTypes"
             app:spanCount="2"
             tools:itemCount="8"
-            tools:listitem="@layout/item_home" />
+            tools:listitem="@layout/item_home">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pokeTypes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_pokemon"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_type" />
 
         <ImageView
             android:id="@+id/favorites"

@@ -133,6 +133,14 @@ class DetailFragment: Fragment() {
                 binding.sAttackBar.progress = it.specialAttack
                 binding.sDefenseBar.progress = it.specialDefense
                 binding.speedBar.progress = it.speed
+
+                binding.hpText.text = "HP : " + it.hp.toString()+" "
+                binding.attText.text = "ATT : " + it.attack.toString()+" "
+                binding.defText.text = "DEF : " + it.defense.toString()+" "
+                binding.sAttText.text = "SAtt : " + it.specialAttack.toString()+" "
+                binding.sDefText.text = "SDef : " + it.specialDefense.toString()+" "
+                binding.speedText.text = "Speed : " + it.speed.toString() +" "
+
             }
 
         )

@@ -127,6 +127,12 @@ class DetailFragment: Fragment() {
                 binding.addBtn.setOnClickListener {
                     viewModel.addToFavorites(name)
                 }
+                binding.hpBar.progress = it.hp
+                binding.attackBar.progress = it.attack
+                binding.defenseBar.progress = it.defense
+                binding.sAttackBar.progress = it.specialAttack
+                binding.sDefenseBar.progress = it.specialDefense
+                binding.speedBar.progress = it.speed
             }
 
         )

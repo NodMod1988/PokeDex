@@ -19,7 +19,7 @@ import java.util.*
 
 enum class ApiStatus { LOADING, DONE, ERROR }
 
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(), TypeInterface {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: PokemonViewModel by activityViewModels()
@@ -43,7 +43,7 @@ class HomeFragment: Fragment() {
         val homeAdapter = HomeAdapter()
         binding.pokeRecycler.adapter = homeAdapter
 
-        val typeAdapter = TypeAdapter()
+        val typeAdapter = TypeAdapter(this)
         binding.pokeTypes.adapter = typeAdapter
 
         viewModel.types.observe(
@@ -100,5 +100,9 @@ class HomeFragment: Fragment() {
 
 
         }
+    }
+
+    override fun getPokemonByType(type: String) {
+        viewModel.getPokemonByType(type)
     }
 }

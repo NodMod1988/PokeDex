@@ -127,8 +127,9 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
 
     suspend fun getPokemonByType(primaryType: String){
-        database.pokeDatabaseDao.getPokemonDetailsByName(primaryType)
+      _pokemonList.value =  database.pokeDatabaseDao.getByPrimarytype(primaryType)
     }
+
 
     fun loadTypeRessources():List<TypeRessource>{
         return listOf(

@@ -90,6 +90,10 @@ class HomeFragment: Fragment(), TypeInterface {
                 isClicked = false
             }
         }
+
+        binding.imgPokedexLogo.setOnClickListener {
+            viewModel.getAllPokemon()
+        }
     }
 
     override fun getPokemonByType(type: String) {

@@ -63,9 +63,7 @@ class HomeFragment: Fragment(), TypeInterface {
         viewModel.pokemonByName.observe(
             viewLifecycleOwner,
             Observer {
-                val adapter = HomeAdapter()
-                adapter.submitList(it)
-                binding.pokeRecycler.adapter = adapter
+                homeAdapter.submitList(it)
             }
         )
 
@@ -85,15 +83,12 @@ class HomeFragment: Fragment(), TypeInterface {
 
         binding.favorites.setOnClickListener {
             if(!isClicked){
-                val adapter = HomeAdapter()
-                viewModel.getFavorites()?.let { it1 -> adapter.submitList(it1) }
-                binding.pokeRecycler.adapter = adapter
+                viewModel.getFavorites()
+
                 isClicked = true
             }else{
 
-                val adapter = HomeAdapter()
-                viewModel.pokemon.value?.let { it1 -> adapter.submitList(it1) }
-                binding.pokeRecycler.adapter = adapter
+                viewModel.getAllPokemon()
                 isClicked = false
 
             }

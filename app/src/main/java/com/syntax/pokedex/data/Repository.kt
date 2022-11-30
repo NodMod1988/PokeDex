@@ -49,7 +49,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         } else {
             // nimmt sämtliche daten aus der datenbank
             Log.i("Repository", "In the database")
-            _pokemonList.postValue(getPokemonsFromDatabase()!!)
+            getPokemonsFromDatabase()
         }
     }
 
@@ -107,8 +107,8 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         )
     }
 
-    suspend fun getPokemonsFromDatabase(): List<DatabasePokemon> {
-        return database.pokeDatabaseDao.getAll()
+    suspend fun getPokemonsFromDatabase() {
+        _pokemonList.value =  database.pokeDatabaseDao.getAll()
     }
 
 
@@ -128,6 +128,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
     suspend fun getPokemonByType(primaryType: String){
       _pokemonList.value =  database.pokeDatabaseDao.getByPrimarytype(primaryType)
+    }
+
+    suspend fun getFavorites(){
+        _pokemonList.value = database.pokeDatabaseDao.getFavorites()
     }
 
 

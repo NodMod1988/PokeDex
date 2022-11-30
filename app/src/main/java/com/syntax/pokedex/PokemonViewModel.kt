@@ -38,8 +38,16 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
         _types.value = repository.loadTypeRessources()
     }
 
-    fun getFavorites(): List<DatabasePokemon>?{
-        return pokemon.value?.filter { it.isFavorite }
+    fun getAllPokemon(){
+        viewModelScope.launch {
+            repository.getPokemonsFromDatabase()
+        }
+    }
+
+    fun getFavorites(){
+        viewModelScope.launch {
+            repository.getFavorites()
+        }
     }
 
     val pokemonByName = repository.pokemonByName

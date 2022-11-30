@@ -84,16 +84,11 @@ class HomeFragment: Fragment(), TypeInterface {
         binding.favorites.setOnClickListener {
             if(!isClicked){
                 viewModel.getFavorites()
-
                 isClicked = true
             }else{
-
                 viewModel.getAllPokemon()
                 isClicked = false
-
             }
-
-
         }
     }
 

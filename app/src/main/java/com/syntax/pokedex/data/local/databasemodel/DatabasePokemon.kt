@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
     val weight: Int,
     val height: Int,
     val primaryType: String = "",
-    val secundaryType: String? = null,
+    val secondaryType: String? = null,
     var isFavorite: Boolean = false,
     val hp: Int,
     val attack: Int,

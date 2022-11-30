@@ -95,9 +95,9 @@ class DetailFragment: Fragment() {
                     }
                 )
 
-                if(it.secundaryType!= null){
+                if(it.secondaryType!= null){
                     binding.imgTypeTwo.setImageResource(
-                        when(it.secundaryType){
+                        when(it.secondaryType){
                             "fire" -> R.drawable.fire
                             "grass" -> R.drawable.grass
                             "water" -> R.drawable.water

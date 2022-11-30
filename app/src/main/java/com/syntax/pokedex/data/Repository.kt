@@ -3,8 +3,10 @@ package com.syntax.pokedex.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.syntax.pokedex.R
 import com.syntax.pokedex.data.local.PokeDatabase
 import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
+import com.syntax.pokedex.data.model.TypeRessource
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.remote.PokeApi
 
@@ -127,4 +129,80 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         return database.pokeDatabaseDao.getFavorites()
     }
 
+    fun loadTypeRessources():List<TypeRessource>{
+        return listOf(
+            TypeRessource(
+                "fire",
+                R.drawable.fire
+            ),
+            TypeRessource(
+                "grass",
+                R.drawable.grass
+            ),
+            TypeRessource(
+                "water",
+                R.drawable.water
+            ),
+            TypeRessource(
+                "bug",
+                R.drawable.bug
+            ),
+            TypeRessource(
+                "poison",
+                R.drawable.poison
+            ),
+            TypeRessource(
+                "psychic",
+                R.drawable.psychic
+            ),
+            TypeRessource(
+                "electric",
+                R.drawable.electric
+            ),
+            TypeRessource(
+                "fighting",
+                R.drawable.fighting
+            ),
+            TypeRessource(
+                "dragon",
+                R.drawable.dragon
+            ),
+            TypeRessource(
+                "dark" ,
+                R.drawable.dark
+            ),
+            TypeRessource(
+                "normal",
+                R.drawable.normal
+            ),
+            TypeRessource(
+                "fairy" ,
+                R.drawable.fairy
+            ),
+            TypeRessource(
+                "flying",
+                R.drawable.flying
+            ),
+            TypeRessource(
+                "steel",
+                R.drawable.steel
+            ),
+            TypeRessource(
+                "ice",
+                R.drawable.ice
+            ),
+            TypeRessource(
+                "rock",
+                R.drawable.rock
+            ),
+            TypeRessource(
+                "ghost",
+                R.drawable.ghost
+            )
+        )
+    }
 }
+
+
+
+

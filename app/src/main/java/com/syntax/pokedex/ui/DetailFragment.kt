@@ -46,8 +46,8 @@ class DetailFragment: Fragment() {
                 binding.imgPokemonPic.load(it.picture)
                 binding.txtPokeId.text = "# "+ it.pokeId.toString()
                 binding.txtPokeName.text = it.name.capitalize()
-                binding.txtPokeHeight.text = (it.height* 10).toString()  + " cm"
-                binding.txtPokeWeight.text = it.weight.toString() + " Kg"
+                binding.txtPokeHeight.text = (it.height.toFloat().div(10)).toString()  + " m"
+                binding.txtPokeWeight.text = (it.weight.toFloat().div(10)).toString() + " Kg"
                 binding.cvPokemonDetail.setBackgroundResource(
                     when(it.primaryType){
                         "fire" -> R.drawable.gradient_fire

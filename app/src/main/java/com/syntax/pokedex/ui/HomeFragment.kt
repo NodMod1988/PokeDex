@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import com.syntax.pokedex.ApiStatus
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.adapter.HomeAdapter
+import com.syntax.pokedex.adapter.TypeAdapter
+import com.syntax.pokedex.data.model.TypeRessource
 import com.syntax.pokedex.databinding.FragmentHomeBinding
 import java.util.*
 
@@ -28,6 +30,7 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel.loadPokeList()
+        viewModel.loadPokeTypes()
         binding = FragmentHomeBinding.inflate(inflater)
 
         return binding.root
@@ -36,8 +39,19 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val homeAdapter = HomeAdapter()
         binding.pokeRecycler.adapter = homeAdapter
+
+        val typeAdapter = TypeAdapter()
+        binding.pokeTypes.adapter = typeAdapter
+
+        viewModel.types.observe(
+            viewLifecycleOwner,
+            Observer {
+                typeAdapter.submitList(it)
+            }
+        )
 
         viewModel.pokemon.observe(
             viewLifecycleOwner,
@@ -45,7 +59,6 @@ class HomeFragment: Fragment() {
                 homeAdapter.submitList(it)
             }
         )
-
 
         viewModel.pokemonByName.observe(
             viewLifecycleOwner,
@@ -87,12 +100,5 @@ class HomeFragment: Fragment() {
 
 
         }
-
-
-
     }
-
-
-
-
 }

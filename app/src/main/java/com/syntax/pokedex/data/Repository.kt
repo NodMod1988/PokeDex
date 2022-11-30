@@ -125,8 +125,9 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         database.pokeDatabaseDao.setFavorite(pokemonName, false)
     }
 
-    suspend fun getFavorites(): List<DatabasePokemon>{
-        return database.pokeDatabaseDao.getFavorites()
+
+    suspend fun getPokemonByType(primaryType: String){
+        database.pokeDatabaseDao.getPokemonDetailsByName(primaryType)
     }
 
     fun loadTypeRessources():List<TypeRessource>{

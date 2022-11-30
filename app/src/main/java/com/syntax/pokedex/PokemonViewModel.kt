@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.syntax.pokedex.data.Repository
 import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.local.getDatabase
+import com.syntax.pokedex.data.model.TypeRessource
 import com.syntax.pokedex.data.remote.PokeApi
 import kotlinx.coroutines.launch
 
@@ -28,6 +29,14 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
 
     // todo beobachten für den splash loading screen
     val pokemon = repository.pokemonList
+
+    private val _types = MutableLiveData<List<TypeRessource>>()
+    val types: LiveData<List<TypeRessource>>
+        get() = _types
+
+    init {
+        _types.value = repository.loadTypeRessources()
+    }
 
     fun getFavorites(): List<DatabasePokemon>?{
         return pokemon.value?.filter { it.isFavorite }
@@ -50,6 +59,16 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading list data from API: $e")
                 _loading.value = ApiStatus.ERROR
+            }
+        }
+    }
+
+    fun loadPokeTypes(){
+        viewModelScope.launch{
+            try {
+                repository.loadTypeRessources()
+            }catch (e: Exception){
+                Log.e(TAG, "Error loading type list data from repository")
             }
         }
     }
@@ -78,6 +97,12 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     fun removeFavorite(pokemonName: String){
         viewModelScope.launch {
             repository.removeFavorite(pokemonName)
+        }
+    }
+
+    fun getPokemonByType(type: String){
+        viewModelScope.launch {
+            repository.getPokemonByType(type)
         }
     }
 

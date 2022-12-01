@@ -67,4 +67,7 @@ dependencies {
 
     // Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
+    //Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
 }

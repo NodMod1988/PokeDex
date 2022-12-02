@@ -29,8 +29,7 @@ class HomeFragment: Fragment(), TypeInterface {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.loadPokeList()
-        viewModel.loadPokeTypes()
+
         binding = FragmentHomeBinding.inflate(inflater)
 
         return binding.root

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.syntax.pokedex.ApiStatus
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.adapter.HomeAdapter
 import com.syntax.pokedex.adapter.TypeAdapter
@@ -15,6 +17,7 @@ import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.local.getDatabase
 import com.syntax.pokedex.databinding.FragmentHomeBinding
 import com.syntax.pokedex.databinding.FragmentSplashBinding
+
 
 class SplashFragment: Fragment() {
 
@@ -29,14 +32,22 @@ class SplashFragment: Fragment() {
     ): View? {
 
         binding = FragmentSplashBinding.inflate(inflater)
-
+        viewModel.loadPokeList()
+        viewModel.loadPokeTypes()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        viewModel.loading.observe(
+            viewLifecycleOwner,
+            Observer {
+                if(it == ApiStatus.DONE){
+                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+                }
+            }
+        )
 
     }
 

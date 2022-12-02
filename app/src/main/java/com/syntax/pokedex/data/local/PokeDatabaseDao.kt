@@ -1,5 +1,6 @@
 package com.syntax.pokedex.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -34,7 +35,8 @@ interface PokeDatabaseDao {
     @Query("SELECT * FROM DatabasePokemon WHERE primaryType = :primaryType")
     suspend fun getByPrimarytype(primaryType: String):List<DatabasePokemon>
 
-
+    @Query("SELECT * FROM DatabasePokemon")
+    fun selectAll(): LiveData<List<DatabasePokemon>>
 
 
 }

@@ -9,6 +9,8 @@ import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 import com.syntax.pokedex.data.model.TypeRessource
 import com.syntax.pokedex.data.model.pokemon.Pokemon
 import com.syntax.pokedex.data.remote.PokeApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
@@ -23,6 +25,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     private val _pokemonList = MutableLiveData<List<DatabasePokemon>>()
     val pokemonList: LiveData<List<DatabasePokemon>>
         get() = _pokemonList
+
 
 
     suspend fun getPokemonData() {

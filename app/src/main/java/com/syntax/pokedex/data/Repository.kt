@@ -26,6 +26,13 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     val pokemonList: LiveData<List<DatabasePokemon>>
         get() = _pokemonList
 
+    private val _count = MutableLiveData<Int>()
+    val count: LiveData<Int>
+        get() = _count
+
+    private val _maxCount = MutableLiveData<Int>()
+    val maxCount: LiveData<Int>
+        get() = _maxCount
 
 
     suspend fun getPokemonData() {
@@ -36,6 +43,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             Log.i("Repository", "Database is Empty")
             try {
                 var response = api.retrofitservice.getPokemonList()
+                _maxCount.value = response.results.size
                 var allPokemon: MutableList<Pokemon> = mutableListOf()
                 for (result in response.results) {
                     try {
@@ -58,7 +66,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
 
     suspend fun parsePokemon(allPokemon: MutableList<Pokemon>) {
+
         val newPokemonList = mutableListOf<DatabasePokemon>()
+
+        var countList: Int = 0
         for (pokemon in allPokemon) {
             val databasePokemon = DatabasePokemon(
                 pokemon.id,
@@ -78,36 +89,41 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
             )
             newPokemonList.add(databasePokemon)
-
+            countList =countList + 1
+            _count.value = countList
         }
         database.pokeDatabaseDao.insertAllPokemon(newPokemonList)
         _pokemonList.postValue(newPokemonList)
+
+
     }
 
     suspend fun getPokemonByName(pokemonName: String): DatabasePokemon {
-        try {
 
-            return database.pokeDatabaseDao.getPokemonDetailsByName(pokemonName)
+            try {
 
-        } catch (e: Exception) {
-            Log.e("Repository", "An error occured: $e")
-        }
-        return DatabasePokemon(
-            1337,
-            "ich habe heute leider kein foto fuer dich",
-            "SCHMATZ",
-            0,
-            131,
-            "rot",
-            null,
-            false,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6
-        )
+                return database.pokeDatabaseDao.getPokemonDetailsByName(pokemonName)
+
+            } catch (e: Exception) {
+                Log.e("Repository", "An error occured: $e")
+            }
+            return DatabasePokemon(
+                1337,
+                "ich habe heute leider kein foto fuer dich",
+                "SCHMATZ",
+                0,
+                131,
+                "rot",
+                null,
+                false,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            )
+
     }
 
     suspend fun getPokemonsFromDatabase() {

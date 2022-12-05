@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -39,6 +40,25 @@ class SplashFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        var max = 0
+
+
+        viewModel.maxCount.observe(
+            viewLifecycleOwner,
+            Observer {
+                println("in maxcount observer")
+            }
+        )
+
+        viewModel.counter.observe(
+            viewLifecycleOwner,
+            Observer {
+                binding.loadingProgress.text = it.toString() + "/" + max.toString()
+            }
+        )
+
 
         viewModel.loading.observe(
             viewLifecycleOwner,

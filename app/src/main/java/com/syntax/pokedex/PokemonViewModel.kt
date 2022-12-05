@@ -27,8 +27,11 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
     val loading: LiveData<ApiStatus>
         get() = _loading
 
-    // todo beobachten für den splash loading screen
     val pokemon = repository.pokemonList
+
+    var counter = repository.count
+
+    val maxCount = repository.maxCount
 
     private val _types = MutableLiveData<List<TypeRessource>>()
     val types: LiveData<List<TypeRessource>>

@@ -26,6 +26,9 @@ interface PokeDatabaseDao {
     @Query("SELECT (SELECT COUNT(*) FROM DatabasePokemon) == 0")
     suspend fun checkIsDbEmpty():Boolean
 
+    @Query("SELECT COUNT (*) FROM DatabasePokemon")
+    suspend fun countPokemons():Int
+
     @Query("SELECT * FROM DatabasePokemon WHERE isFavorite = 1")
     suspend fun getFavorites(): List<DatabasePokemon>
 

@@ -1,5 +1,6 @@
 package com.syntax.pokedex.ui
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
@@ -156,6 +157,30 @@ class DetailFragment: Fragment() {
                 binding.sAttText.text = "SAtt : " + it.specialAttack.toString()+" "
                 binding.sDefText.text = "SDef : " + it.specialDefense.toString()+" "
                 binding.speedText.text = "Speed : " + it.speed.toString() +" "
+
+                val animatorhp = ObjectAnimator.ofInt(binding.hpBar, "progress", 0,100)
+                animatorhp.duration = 800
+                animatorhp.start()
+
+                val animatoratt = ObjectAnimator.ofInt(binding.attackBar, "progress", 0,100)
+                animatoratt.duration = 750
+                animatoratt.start()
+
+                val animatorDeff = ObjectAnimator.ofInt(binding.defenseBar, "progress", 0,100)
+                animatorDeff.duration = 700
+                animatorDeff.start()
+
+                val animatorSatt = ObjectAnimator.ofInt(binding.sAttackBar, "progress", 0,100)
+                animatorSatt.duration = 650
+                animatorSatt.start()
+
+                val animatorSdeff = ObjectAnimator.ofInt(binding.sDefenseBar, "progress", 0,100)
+                animatorSdeff.duration = 600
+                animatorSdeff.start()
+
+                val animatorSp = ObjectAnimator.ofInt(binding.attackBar, "progress", 0,100)
+                animatorSp.duration = 550
+                animatorSp.start()
 
             }
 

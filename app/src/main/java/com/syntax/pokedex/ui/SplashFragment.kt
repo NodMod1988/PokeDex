@@ -45,10 +45,12 @@ class SplashFragment: Fragment() {
         var max = 0
 
 
+
         viewModel.maxCount.observe(
             viewLifecycleOwner,
             Observer {
                 println("in maxcount observer")
+                max = it
             }
         )
 
@@ -70,5 +72,7 @@ class SplashFragment: Fragment() {
         )
 
     }
+
+
 
 }

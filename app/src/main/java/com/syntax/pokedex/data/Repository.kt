@@ -38,7 +38,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
     suspend fun getPokemonData() {
 
         var isEmpty = database.pokeDatabaseDao.checkIsDbEmpty()
-
+        var countList: Int = 0
         if (isEmpty) {
             Log.i("Repository", "Database is Empty")
             try {
@@ -49,6 +49,8 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
                     try {
                         val pokemon = api.retrofitservice.getPokemon(result.name)
                         allPokemon.add(pokemon)
+                        countList += 1
+                        _count.value = countList
                     } catch (e: Exception) {
                         Log.e("Repository", "A Error Occured1: $e")
                     }
@@ -69,7 +71,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
         val newPokemonList = mutableListOf<DatabasePokemon>()
 
-        var countList: Int = 0
+
         for (pokemon in allPokemon) {
             val databasePokemon = DatabasePokemon(
                 pokemon.id,
@@ -89,8 +91,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
             )
             newPokemonList.add(databasePokemon)
-            countList =countList + 1
-            _count.value = countList
+
         }
         database.pokeDatabaseDao.insertAllPokemon(newPokemonList)
         _pokemonList.postValue(newPokemonList)

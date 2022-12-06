@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_pokemon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_pokemon"
@@ -38,6 +39,7 @@
                     android:layout_marginStart="8dp"
                     android:adjustViewBounds="true"
                     android:cropToPadding="true"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toTopOf="@+id/txt_pokename"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
                     android:text="TextView"
-                    android:textSize="30sp"
+                    android:textSize="22sp"
                     app:layout_constraintEnd_toEndOf="@+id/img_pokemon"
                     app:layout_constraintStart_toStartOf="@+id/img_pokemon"
                     app:layout_constraintTop_toBottomOf="@+id/img_pokemon" />

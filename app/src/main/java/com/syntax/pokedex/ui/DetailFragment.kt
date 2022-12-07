@@ -12,6 +12,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.syntax.pokedex.PokemonViewModel
 import com.syntax.pokedex.R
@@ -181,6 +184,10 @@ class DetailFragment: Fragment() {
                 val animatorSp = ObjectAnimator.ofInt(binding.attackBar, "progress", 0,100)
                 animatorSp.duration = 550
                 animatorSp.start()
+
+                binding.backBtn.setOnClickListener {
+                    findNavController().navigateUp()
+                }
 
             }
 

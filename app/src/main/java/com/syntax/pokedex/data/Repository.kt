@@ -45,8 +45,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             try {
                 var response = api.retrofitservice.getPokemonList()
                 _maxCount.value = response.results.size
-                var allPokemon: MutableList<Pokemon> = mutableListOf()
-                var pokemonDescriptionList: MutableList<PokemonSpecies> = mutableListOf()
+
                 for (result in response.results) {
                     try {
                         val pokemon = api.retrofitservice.getPokemon(result.name)
@@ -54,17 +53,16 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
                         try {
                             val pokemonDescription = api.retrofitservice.getPokemonDescription(result.name)
                             val germanDescriptions = pokemonDescription.flavorTextEntries?.filter {it -> it.language?.name == "de" }
-                            if(!germanDescriptions.isNullOrEmpty()){
+                            if(germanDescriptions.isNullOrEmpty()){
+                                break
+                            }else{
                                 description =  germanDescriptions.get(0).flavorText.toString()
                             }
 
                         }catch (e: Exception){
-                            Log.i("Repository", "No Description for this Pokemon")
+                            //Log.i("Repository", "No Description for this Pokemon")
                         }
 
-
-                       // allPokemon.add(pokemon)
-                       // pokemonDescriptionList.add(pokemonDescription)
                         parseSinglePokemon(pokemon, description)
                         countList += 1
                         _count.value = countList
@@ -104,48 +102,6 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             description
         )
         database.pokeDatabaseDao.insertSinglePokemon(databasePokemon)
-    }
-
-
-    suspend fun parsePokemon(allPokemon: MutableList<Pokemon>, pokemonDesc: MutableList<PokemonSpecies> ) {
-
-        val newPokemonList = mutableListOf<DatabasePokemon>()
-
-
-        for (i in allPokemon.indices) {
-
-            val pokemon = allPokemon[i]
-            val germanDescriptions = pokemonDesc[i].flavorTextEntries?.filter {it -> it.language?.name == "de" }
-
-            val description =  if(germanDescriptions!!.isEmpty()) "No Description" else germanDescriptions?.get(0)?.flavorText
-
-            val databasePokemon = DatabasePokemon(
-                pokemon.id,
-                pokemon.sprites.other.officialArtwork.front_default ?: " ",
-                pokemon.name,
-                pokemon.weight,
-                pokemon.height,
-                pokemon.types[0].type.name,
-                if (pokemon.types.size>1) pokemon.types[1].type.name else null,
-                false,
-                pokemon.stats[0].base_stat,
-                pokemon.stats[1].base_stat,
-                pokemon.stats[2].base_stat,
-                pokemon.stats[3].base_stat,
-                pokemon.stats[4].base_stat,
-                pokemon.stats[5].base_stat,
-                description
-            )
-            newPokemonList.add(databasePokemon)
-
-        }
-
-
-
-        database.pokeDatabaseDao.insertAllPokemon(newPokemonList)
-        _pokemonList.postValue(newPokemonList)
-
-
     }
 
     suspend fun getPokemonByName(pokemonName: String): DatabasePokemon {

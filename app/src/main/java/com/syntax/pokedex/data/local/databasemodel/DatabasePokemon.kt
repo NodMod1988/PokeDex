@@ -20,5 +20,7 @@ import androidx.room.PrimaryKey
     val defense: Int,
     val specialAttack: Int,
     val specialDefense: Int,
-    val speed: Int
+    val speed: Int,
+
+    val description: String?
 )

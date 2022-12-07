@@ -4,6 +4,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.syntax.pokedex.data.model.DataSourcePokemon
 import com.syntax.pokedex.data.model.pokemon.Pokemon
+import com.syntax.pokedex.data.model.pokemonSpecies.PokemonSpecies
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -28,6 +29,9 @@ interface PokeApiService {
 
     @GET("pokemon/{name}")
     suspend fun getPokemon(@Path("name") name: String): Pokemon
+
+    @GET("pokemon-species/{name}")
+    suspend fun getPokemonDescription(@Path("name") name: String): PokemonSpecies
 
 }
 

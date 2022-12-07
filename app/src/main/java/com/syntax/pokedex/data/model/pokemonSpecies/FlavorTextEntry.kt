@@ -1,7 +1,10 @@
 package com.syntax.pokedex.data.model.pokemonSpecies
 
+import com.squareup.moshi.Json
+
 data class FlavorTextEntry(
-    val flavor_text: String,
-    val language: Language,
-    val version: Version
+    @Json(name = "flavor_text")
+    val flavorText: String?,
+    val language: Language?
+
 )

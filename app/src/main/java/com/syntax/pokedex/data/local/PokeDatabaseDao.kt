@@ -11,6 +11,11 @@ import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
 @Dao
 interface PokeDatabaseDao {
 
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSinglePokemon(pokemon:DatabasePokemon)
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllPokemon(pokemonList:List<DatabasePokemon>)
 

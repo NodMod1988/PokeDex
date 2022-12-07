@@ -1,261 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_pokemonDetail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/txt_pokeWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintStart_toEndOf="@+id/txt_pokeHeight"
-                    app:layout_constraintTop_toTopOf="@+id/txt_pokeHeight"
-                    tools:text="Weight" />
 
-                <TextView
-                    android:id="@+id/txt_pokeHeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="76dp"
-                    app:layout_constraintStart_toStartOf="@+id/img_pokemonPic"
-                    app:layout_constraintTop_toBottomOf="@+id/img_pokemonPic"
-                    tools:text="Height" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_pokemonDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/txt_pokeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="160dp"
-                    android:layout_marginTop="44dp"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Name" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/img_pokemonPic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_pokeName"
-                    tools:srcCompat="@tools:sample/avatars" />
+                        <TextView
+                            android:id="@+id/txt_pokeWeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            app:layout_constraintStart_toEndOf="@+id/txt_pokeHeight"
+                            app:layout_constraintTop_toTopOf="@+id/txt_pokeHeight"
+                            tools:text="Weight" />
 
-                <TextView
-                    android:id="@+id/txt_pokeId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="52dp"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_pokeName"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_pokeName"
-                    app:layout_constraintTop_toTopOf="@+id/txt_pokeName"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:text="PokeId" />
+                        <TextView
+                            android:id="@+id/txt_pokeHeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="36dp"
+                            app:layout_constraintStart_toStartOf="@+id/img_pokemonPic"
+                            app:layout_constraintTop_toBottomOf="@+id/img_typeTwo"
+                            tools:text="Height" />
 
-                <ImageView
-                    android:id="@+id/img_typeOne"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintStart_toStartOf="@+id/img_pokemonPic"
-                    app:layout_constraintTop_toBottomOf="@+id/img_pokemonPic" />
+                        <TextView
+                            android:id="@+id/txt_pokeName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="44dp"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="30sp"
+                            app:layout_constraintEnd_toEndOf="@+id/txt_pokeId"
+                            app:layout_constraintStart_toStartOf="@+id/txt_pokeId"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_pokeId"
+                            tools:text="Name" />
 
-                <ImageView
-                    android:id="@+id/img_typeTwo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/img_typeOne"
-                    app:layout_constraintTop_toBottomOf="@+id/img_pokemonPic"
-                    app:srcCompat="@drawable/dark" />
+                        <ImageView
+                            android:id="@+id/img_pokemonPic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            app:layout_constraintEnd_toEndOf="@+id/txt_pokeName"
+                            app:layout_constraintStart_toStartOf="@+id/txt_pokeName"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_pokeName"
+                            tools:srcCompat="@tools:sample/avatars" />
 
-                <ProgressBar
-                    android:id="@+id/hpBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginTop="136dp"
-                    android:max="200"
-                    android:progressBackgroundTint="#E91E63"
-                    android:scaleY="2"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_pokeWeight"
-                    app:layout_constraintStart_toStartOf="@+id/txt_pokeHeight"
-                    app:layout_constraintTop_toBottomOf="@+id/img_pokemonPic" />
+                        <TextView
+                            android:id="@+id/txt_pokeId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="156dp"
+                            android:layout_marginTop="32dp"
+                            android:textSize="30sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="PokeId" />
 
-                <ProgressBar
-                    android:id="@+id/attackBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:max="200"
-                    android:progressBackgroundTint="#E91E63"
-                    android:scaleY="2"
-                    app:layout_constraintStart_toStartOf="@+id/hpBar"
-                    app:layout_constraintTop_toBottomOf="@+id/hpBar" />
+                        <ImageView
+                            android:id="@+id/img_typeOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:color/transparent"
+                            app:layout_constraintStart_toStartOf="@+id/img_pokemonPic"
+                            app:layout_constraintTop_toBottomOf="@+id/img_pokemonPic" />
 
-                <ProgressBar
-                    android:id="@+id/defenseBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:max="200"
-                    android:progressBackgroundTint="#E91E63"
-                    android:scaleY="2"
-                    app:layout_constraintStart_toStartOf="@+id/attackBar"
-                    app:layout_constraintTop_toBottomOf="@+id/attackBar" />
+                        <ImageView
+                            android:id="@+id/img_typeTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            app:layout_constraintStart_toEndOf="@+id/img_typeOne"
+                            app:layout_constraintTop_toTopOf="@+id/img_typeOne"
+                            app:srcCompat="@drawable/dark" />
 
-                <ProgressBar
-                    android:id="@+id/sAttackBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:max="200"
-                    android:progressBackgroundTint="#E91E63"
-                    android:scaleY="2"
-                    app:layout_constraintStart_toStartOf="@+id/defenseBar"
-                    app:layout_constraintTop_toBottomOf="@+id/defenseBar" />
+                        <ProgressBar
+                            android:id="@+id/hpBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:max="200"
+                            android:progressBackgroundTint="#E91E63"
+                            android:scaleY="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_pokeWeight" />
 
-                <ProgressBar
-                    android:id="@+id/sDefenseBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:max="200"
-                    android:progressBackgroundTint="#E91E63"
-                    android:scaleY="2"
-                    app:layout_constraintStart_toStartOf="@+id/sAttackBar"
-                    app:layout_constraintTop_toBottomOf="@+id/sAttackBar" />
+                        <ProgressBar
+                            android:id="@+id/attackBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:max="200"
+                            android:progressBackgroundTint="#E91E63"
+                            android:scaleY="2"
+                            app:layout_constraintStart_toStartOf="@+id/hpBar"
+                            app:layout_constraintTop_toBottomOf="@+id/hpBar" />
 
-                <ProgressBar
-                    android:id="@+id/speedBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:max="200"
-                    android:progressBackgroundTint="#E91E63"
-                    android:scaleY="2"
-                    app:layout_constraintStart_toStartOf="@+id/sDefenseBar"
-                    app:layout_constraintTop_toBottomOf="@+id/sDefenseBar" />
+                        <ProgressBar
+                            android:id="@+id/defenseBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:max="200"
+                            android:progressBackgroundTint="#E91E63"
+                            android:scaleY="2"
+                            app:layout_constraintStart_toStartOf="@+id/attackBar"
+                            app:layout_constraintTop_toBottomOf="@+id/attackBar" />
 
-                <TextView
-                    android:id="@+id/hpText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    app:layout_constraintBottom_toBottomOf="@+id/hpBar"
-                    app:layout_constraintEnd_toStartOf="@+id/hpBar"
-                    app:layout_constraintTop_toTopOf="@+id/hpBar"
-                    tools:text="Hp" />
+                        <ProgressBar
+                            android:id="@+id/sAttackBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:max="200"
+                            android:progressBackgroundTint="#E91E63"
+                            android:scaleY="2"
+                            app:layout_constraintStart_toStartOf="@+id/defenseBar"
+                            app:layout_constraintTop_toBottomOf="@+id/defenseBar" />
 
-                <TextView
-                    android:id="@+id/attText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/attackBar"
-                    app:layout_constraintEnd_toStartOf="@+id/attackBar"
-                    app:layout_constraintTop_toTopOf="@+id/attackBar"
-                    tools:text="Attack" />
+                        <ProgressBar
+                            android:id="@+id/sDefenseBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:max="200"
+                            android:progressBackgroundTint="#E91E63"
+                            android:scaleY="2"
+                            app:layout_constraintStart_toStartOf="@+id/sAttackBar"
+                            app:layout_constraintTop_toBottomOf="@+id/sAttackBar" />
 
-                <TextView
-                    android:id="@+id/defText"
-                    android:layout_width="57dp"
-                    android:layout_height="25dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/defenseBar"
-                    app:layout_constraintEnd_toStartOf="@+id/defenseBar"
-                    app:layout_constraintTop_toTopOf="@+id/defenseBar"
-                    tools:text="Defense" />
+                        <ProgressBar
+                            android:id="@+id/speedBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:max="200"
+                            android:progressBackgroundTint="#E91E63"
+                            android:scaleY="2"
+                            app:layout_constraintStart_toStartOf="@+id/sDefenseBar"
+                            app:layout_constraintTop_toBottomOf="@+id/sDefenseBar" />
 
-                <TextView
-                    android:id="@+id/sAttText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/sAttackBar"
-                    app:layout_constraintEnd_toStartOf="@+id/sAttackBar"
-                    app:layout_constraintTop_toTopOf="@+id/sAttackBar"
-                    tools:text="sAttack" />
+                        <TextView
+                            android:id="@+id/hpText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toTopOf="@+id/hpBar"
+                            app:layout_constraintStart_toStartOf="@+id/hpBar"
+                            tools:text="Hp" />
 
-                <TextView
-                    android:id="@+id/sDefText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/sDefenseBar"
-                    app:layout_constraintEnd_toStartOf="@+id/sDefenseBar"
-                    app:layout_constraintTop_toTopOf="@+id/sDefenseBar"
-                    tools:text="sDefense" />
+                        <TextView
+                            android:id="@+id/attText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toTopOf="@+id/attackBar"
+                            app:layout_constraintStart_toStartOf="@+id/attackBar"
+                            tools:text="Attack" />
 
-                <TextView
-                    android:id="@+id/speedText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/speedBar"
-                    app:layout_constraintEnd_toStartOf="@+id/speedBar"
-                    app:layout_constraintTop_toTopOf="@+id/speedBar"
-                    tools:text="Speed" />
+                        <TextView
+                            android:id="@+id/defText"
+                            android:layout_width="57dp"
+                            android:layout_height="25dp"
+                            app:layout_constraintBottom_toTopOf="@+id/defenseBar"
+                            app:layout_constraintStart_toStartOf="@+id/defenseBar"
+                            tools:text="Defense" />
 
-                <ImageView
-                    android:id="@+id/removeBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="556dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_bookmark_remove_24" />
+                        <TextView
+                            android:id="@+id/sAttText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toTopOf="@+id/sAttackBar"
+                            app:layout_constraintStart_toStartOf="@+id/sAttackBar"
+                            tools:text="sAttack" />
 
-                <ImageView
-                    android:id="@+id/addBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="556dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_bookmark_add_24"
-                    tools:visibility="visible" />
+                        <TextView
+                            android:id="@+id/sDefText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toTopOf="@+id/sDefenseBar"
+                            app:layout_constraintStart_toStartOf="@+id/sDefenseBar"
+                            tools:text="sDefense" />
 
-                <MultiAutoCompleteTextView
-                    android:id="@+id/txtPokemonDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MultiAutoCompleteTextView"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                        <TextView
+                            android:id="@+id/speedText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toTopOf="@+id/speedBar"
+                            app:layout_constraintStart_toStartOf="@+id/speedBar"
+                            tools:text="Speed" />
+
+                        <ImageView
+                            android:id="@+id/removeBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="32dp"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_bookmark_remove_24" />
+
+                        <ImageView
+                            android:id="@+id/addBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="32dp"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_bookmark_add_24"
+                            tools:visibility="visible" />
+
+                        <MultiAutoCompleteTextView
+                            android:id="@+id/txtPokemonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="500dp"
+                            android:text="MultiAutoCompleteTextView"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/speedBar" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </layout>

@@ -189,7 +189,7 @@ class DetailFragment: Fragment() {
                     findNavController().navigateUp()
                 }
 
-                binding.txtPokemonDescription.text = it.description
+                binding.txtPokemonDescription.text = it.description?.replace("\n", " ")
 
             }
 

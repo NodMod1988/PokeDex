@@ -114,7 +114,4 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
             repository.getPokemonByType(type)
         }
     }
-
-
-
 }

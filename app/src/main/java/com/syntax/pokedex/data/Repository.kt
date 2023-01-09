@@ -6,11 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import com.syntax.pokedex.R
 import com.syntax.pokedex.data.local.PokeDatabase
 import com.syntax.pokedex.data.local.databasemodel.DatabasePokemon
+import com.syntax.pokedex.data.model.PokemonListItem
 import com.syntax.pokedex.data.model.TypeRessource
 import com.syntax.pokedex.data.model.pokemon.Pokemon
+import com.syntax.pokedex.data.model.pokemon.PokemonList
 import com.syntax.pokedex.data.model.pokemonSpecies.PokemonSpecies
 import com.syntax.pokedex.data.remote.PokeApi
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.withContext
 
 class Repository(private val api: PokeApi, private val database: PokeDatabase) {
@@ -36,7 +38,10 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
         get() = _maxCount
 
 
-    suspend fun getPokemonData() {
+
+
+
+    suspend fun getPokemonData() = runBlocking {
 
         var isEmpty = database.pokeDatabaseDao.checkIsDbEmpty()
         var countList: Int = 0
@@ -45,30 +50,22 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             try {
                 var response = api.retrofitservice.getPokemonList()
                 _maxCount.value = response.results.size
-
+                var jobs: MutableList<Job> = mutableListOf()
                 for (result in response.results) {
-                    try {
-                        val pokemon = api.retrofitservice.getPokemon(result.name)
-                        var description = "No Description"
-                        try {
-                            val pokemonDescription = api.retrofitservice.getPokemonDescription(result.name)
-                            val germanDescriptions = pokemonDescription.flavorTextEntries?.filter {it -> it.language?.name == "de" }
-                            if(germanDescriptions.isNullOrEmpty()){
-                                break
-                            }else{
-                                description =  germanDescriptions.get(0).flavorText.toString()
-                            }
 
-                        }catch (e: Exception){
-                            //Log.i("Repository", "No Description for this Pokemon")
-                        }
-
-                        parseSinglePokemon(pokemon, description)
-                        countList += 1
-                        _count.value = countList
-                    } catch (e: Exception) {
-                        Log.e("Repository", "A Error Occured1: $e")
+                   val job =  launch {
+                        getNewPokemon(result)
                     }
+                    jobs.add(job)
+
+                    countList += 1
+                    _count.value = countList
+
+                }
+
+                for (job in jobs){
+
+                    job.join()
                 }
                 _pokemonList.value = database.pokeDatabaseDao.getAll()
                 //parsePokemon(allPokemon, pokemonDescriptionList)
@@ -132,6 +129,36 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             )
 
     }
+
+    suspend fun getNewPokemon(result : PokemonListItem){
+        try {
+            val pokemon = api.retrofitservice.getPokemon(result.name)
+            var description = "No Description"
+            try {
+                val pokemonDescription =
+                    api.retrofitservice.getPokemonDescription(result.name)
+                val germanDescriptions =
+                    pokemonDescription.flavorTextEntries?.filter { it -> it.language?.name == "de" }
+                if (germanDescriptions.isNullOrEmpty()) {
+                    println("no german description")
+                } else {
+                    description = germanDescriptions.get(0).flavorText.toString()
+                }
+
+            } catch (e: Exception) {
+                //Log.i("Repository", "No Description for this Pokemon")
+            }
+
+            parseSinglePokemon(pokemon, description)
+
+        } catch (e: Exception) {
+            Log.e("Repository", "A Error Occured1: $e")
+        }
+    }
+
+
+
+
 
     suspend fun getPokemonsFromDatabase() {
         _pokemonList.value =  database.pokeDatabaseDao.getAll()

@@ -41,7 +41,7 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
 
 
 
-    suspend fun getPokemonData() = runBlocking {
+    suspend fun getPokemonData() {
 
         var isEmpty = database.pokeDatabaseDao.checkIsDbEmpty()
         var countList: Int = 0
@@ -50,23 +50,15 @@ class Repository(private val api: PokeApi, private val database: PokeDatabase) {
             try {
                 var response = api.retrofitservice.getPokemonList()
                 _maxCount.value = response.results.size
-                var jobs: MutableList<Job> = mutableListOf()
-                for (result in response.results) {
 
-                   val job =  launch {
+                CoroutineScope(Main).launch {
+                    for (result in response.results) {
                         getNewPokemon(result)
+                        countList += 1
+                        _count.value = countList
                     }
-                    jobs.add(job)
+                }.join()
 
-                    countList += 1
-                    _count.value = countList
-
-                }
-
-                for (job in jobs){
-
-                    job.join()
-                }
                 _pokemonList.value = database.pokeDatabaseDao.getAll()
                 //parsePokemon(allPokemon, pokemonDescriptionList)
             } catch (e: Exception) {
